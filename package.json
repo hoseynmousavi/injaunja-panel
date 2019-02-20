@@ -1,0 +1,36 @@
+{
+  "name": "inja-panel",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jalali-date": "^1.0.2",
+    "lodash": "^4.17.11",
+    "prop-types": "latest",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-google-maps": "^9.4.5",
+    "react-notifications": "^1.4.3",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.2",
+    "react-slick": "^0.23.2",
+    "react-spinners": "^0.4.8",
+    "react-transition-group": "^2.5.2",
+    "recompose": "^0.30.0",
+    "slick-carousel": "^1.8.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && del build\\static\\js\\*.map",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

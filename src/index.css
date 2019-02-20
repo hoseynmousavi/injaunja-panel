@@ -1,0 +1,63 @@
+@import "Styles/App.css";
+@import "Styles/Material.css";
+@import "Styles/MaterialInput.css";
+@import "Styles/Checkbox.css";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import '~react-notifications/lib/notifications.css';
+@import "Styles/DatePicker.css";
+@import "Styles/Map.css";
+
+
+@font-face {
+    font-family: "IranSans Light";
+    src: url("Media/Fonts/IRANSans_Light.woff") format("woff");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    font-family: "IranSans Light", serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #F1F2F7;
+}
+
+button, input, textarea {
+    font-family: "IranSans Light", serif;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    border: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+* {
+    transition-duration: 0.3s;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #cdcdcd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2A3542;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"/>
+    <meta name="viewport" content="width=700, initial-scale=0.5, shrink-to-fit=no">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <title>کنترل پنل</title>
+
+    <script type="text/javascript">
+        Object.defineProperty(HTMLScriptElement.prototype, "__src__", Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, "src"));
+        Object.defineProperty(HTMLScriptElement.prototype, "src", {
+            configurable: true,
+            enumerable: true,
+            get()
+            {
+                return this.__src__;
+            },
+            set(new_src)
+            {
+                if (!new_src || !(new_src.startsWith("https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate") ||
+                    new_src.startsWith("https://maps.googleapis.com/maps/api/js/QuotaService.RecordEvent")))
+                    this.__src__ = new_src;
+            }
+        });
+    </script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyD36Sc8nBz7Nb5w_P5Wce_HidKpg6Mlnco&language=fa"></script>
+
+</head>
+<body>
+<noscript>لطفا برای استفاده از کنترل ، دسترسی جاوااسکریپت سایت را فعال کنید</noscript>
+<div id="root"></div>
+</body>
+</html>
