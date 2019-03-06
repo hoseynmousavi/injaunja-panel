@@ -38,7 +38,7 @@ class App extends Component
             const phone = localStorage.getItem('phone')
             const username = localStorage.getItem('username')
 
-            fetch('http://23.227.207.218:1435/user/login/admin', {
+            fetch('https://restful.injaunja.com/user/login/admin', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ class App extends Component
     {
         this.setState({...this.state, loading: true}, () =>
         {
-            fetch('http://23.227.207.218:1435/category', {
+            fetch('https://restful.injaunja.com/category', {
                 headers: {
                     'Cache-Control': 'no-cache'
                 }
@@ -106,7 +106,7 @@ class App extends Component
                     {
                         this.setState({...this.state, categories: [...resJson.form]}, () =>
                         {
-                            fetch('http://23.227.207.218:1435/event', {
+                            fetch('https://restful.injaunja.com/event', {
                                 headers: {
                                     'Cache-Control': 'no-cache'
                                 }
@@ -118,7 +118,7 @@ class App extends Component
                                     {
                                         this.setState({...this.state, events: [...resJson.form]}, () =>
                                         {
-                                            fetch('http://23.227.207.218:1435/user/admin', {
+                                            fetch('https://restful.injaunja.com/user/admin', {
                                                 headers: {
                                                     'Cache-Control': 'no-cache',
                                                     'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'

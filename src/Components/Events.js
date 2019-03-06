@@ -189,7 +189,7 @@ class Events extends Component
         {
             this.props.handleLoading(true).then(() =>
             {
-                fetch('http://23.227.207.218:1435/event/delete', {
+                fetch('https://restful.injaunja.com/event/delete', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -363,7 +363,7 @@ class Events extends Component
             formData.append('end_year', event.end_year)
         }
 
-        fetch('http://23.227.207.218:1435/event/create', {
+        fetch('https://restful.injaunja.com/event/create', {
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
@@ -379,7 +379,7 @@ class Events extends Component
                 {
                     const id = responseJson.form.id
 
-                    fetch(`http://23.227.207.218:1435/event/full/${id}`, {
+                    fetch(`https://restful.injaunja.com/event/full/${id}`, {
                         headers: {
                             'Cache-Control': 'no-cache'
                         }
@@ -454,7 +454,7 @@ class Events extends Component
                                 formData.append(i.toString(), this.state.pictures[i])
                             })
 
-                            fetch('http://23.227.207.218:1435/event/create', {
+                            fetch('https://restful.injaunja.com/event/create', {
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
@@ -470,7 +470,7 @@ class Events extends Component
                                     {
                                         const id = responseJson.form.id
 
-                                        fetch(`http://23.227.207.218:1435/event/full/${id}`, {
+                                        fetch(`https://restful.injaunja.com/event/full/${id}`, {
                                             headers: {
                                                 'Cache-Control': 'no-cache'
                                             }
@@ -601,7 +601,7 @@ class Events extends Component
                                 formData.append(i.toString(), this.state.pictures[i])
                             })
 
-                            fetch('http://23.227.207.218:1435/event/update', {
+                            fetch('https://restful.injaunja.com/event/update', {
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
@@ -615,7 +615,7 @@ class Events extends Component
                                     console.log('res: ', responseJson)
                                     if (responseJson.state === 1)
                                     {
-                                        fetch(`http://23.227.207.218:1435/event/full/${this.state.updateId}`, {
+                                        fetch(`https://restful.injaunja.com/event/full/${this.state.updateId}`, {
                                             headers: {
                                                 'Cache-Control': 'no-cache'
                                             }
@@ -807,7 +807,7 @@ class Events extends Component
         {
             this.props.handleLoading(true).then(() =>
             {
-                fetch('http://23.227.207.218:1435/notification/add', {
+                fetch('https://restful.injaunja.com/notification/add', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -825,7 +825,7 @@ class Events extends Component
                         if (resJson.state === 1)
                         {
 
-                            fetch(`http://23.227.207.218:1435/event/full/${this.state.event.id}`, {
+                            fetch(`https://restful.injaunja.com/event/full/${this.state.event.id}`, {
                                 headers: {
                                     'Cache-Control': 'no-cache'
                                 }

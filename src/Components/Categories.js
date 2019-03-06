@@ -104,7 +104,7 @@ class Categories extends Component
                             formData.append('picture', picture)
                             formData.append('svg', svg)
 
-                            fetch('http://23.227.207.218:1435/category/create', {
+                            fetch('https://restful.injaunja.com/category/create', {
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
@@ -119,7 +119,7 @@ class Categories extends Component
                                     {
                                         const id = responseJson.form.id
 
-                                        fetch(`http://23.227.207.218:1435/category/${id}`, {
+                                        fetch(`https://restful.injaunja.com/category/${id}`, {
                                             headers: {
                                                 'Cache-Control': 'no-cache'
                                             }
@@ -209,7 +209,7 @@ class Categories extends Component
                             formData.append('svg', svg)
                             formData.append('selectable', this.state.selectable)
 
-                            fetch('http://23.227.207.218:1435/category/update', {
+                            fetch('https://restful.injaunja.com/category/update', {
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
@@ -222,7 +222,7 @@ class Categories extends Component
                                 {
                                     if (responseJson.state === 1)
                                     {
-                                        fetch(`http://23.227.207.218:1435/category/${this.state.updateId}`, {
+                                        fetch(`https://restful.injaunja.com/category/${this.state.updateId}`, {
                                             headers: {
                                                 'Cache-Control': 'no-cache'
                                             }
@@ -326,7 +326,7 @@ class Categories extends Component
         {
             this.props.handleLoading(true).then(() =>
             {
-                fetch('http://23.227.207.218:1435/category/delete', {
+                fetch('https://restful.injaunja.com/category/delete', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
