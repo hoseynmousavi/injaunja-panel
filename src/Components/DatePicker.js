@@ -31,7 +31,7 @@ class MyDatePicker extends Component
 
     componentDidMount()
     {
-        fetch('http://api.kaho.ir/DatePicker', {
+        fetch('https://api.kaho.ir/DatePicker', {
             headers: {
                 'Cache-Control': 'no-cache'
             }
