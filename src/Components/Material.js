@@ -7,7 +7,7 @@ class Material extends React.Component
         className: PropTypes.string,
         onClick: PropTypes.func,
         content: PropTypes.any.isRequired,
-        backgroundColor: PropTypes.string
+        backgroundColor: PropTypes.string,
     }
 
     constructor(props)
@@ -116,9 +116,7 @@ class Material extends React.Component
     {
         return (
             <div ref={e => this.container = e} className={this.props.className ? this.props.className + ' material' : 'material'} onMouseDown={this.onMouseDown} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleLeave} onClick={this.props.onClick}>
-                <div className='material-content'>
-                    {this.props.content}
-                </div>
+                {this.props.content}
             </div>
         )
     }

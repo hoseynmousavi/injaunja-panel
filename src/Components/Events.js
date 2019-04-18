@@ -102,7 +102,7 @@ class Events extends Component
             ...this.state,
             start_day: parseInt(date[2]),
             start_month: parseInt(date[1]),
-            start_year: parseInt(date[0])
+            start_year: parseInt(date[0]),
         })
     }
 
@@ -113,7 +113,7 @@ class Events extends Component
             ...this.state,
             end_day: parseInt(date[2]),
             end_month: parseInt(date[1]),
-            end_year: parseInt(date[0])
+            end_year: parseInt(date[0]),
         })
     }
 
@@ -194,11 +194,11 @@ class Events extends Component
                     headers: {
                         'Content-Type': 'application/json',
                         'Cache-Control': 'no-cache',
-                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                     },
                     body: JSON.stringify({
-                        id: id
-                    })
+                        id: id,
+                    }),
                 })
                     .then((res) => res.json())
                     .then((resJson) =>
@@ -262,7 +262,7 @@ class Events extends Component
             start_time_valid: true,
             end_time: event.end_time,
             end_time_valid: true,
-            location: event.location
+            location: event.location,
         })
     }
 
@@ -301,7 +301,7 @@ class Events extends Component
 
                 old_pictures: [],
                 previews: [],
-                pictures: []
+                pictures: [],
             }, () => resolve())
         })
     }
@@ -367,9 +367,9 @@ class Events extends Component
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
-                'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
             },
-            body: formData
+            body: formData,
         })
             .then((response) => response.json())
             .then((responseJson) =>
@@ -381,8 +381,8 @@ class Events extends Component
 
                     fetch(`https://restful.injaunja.com/event/full/${id}`, {
                         headers: {
-                            'Cache-Control': 'no-cache'
-                        }
+                            'Cache-Control': 'no-cache',
+                        },
                     })
                         .then(res => res.json())
                         .then(resJson =>
@@ -458,9 +458,9 @@ class Events extends Component
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
-                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                                 },
-                                body: formData
+                                body: formData,
                             })
                                 .then((response) => response.json())
                                 .then((responseJson) =>
@@ -472,8 +472,8 @@ class Events extends Component
 
                                         fetch(`https://restful.injaunja.com/event/full/${id}`, {
                                             headers: {
-                                                'Cache-Control': 'no-cache'
-                                            }
+                                                'Cache-Control': 'no-cache',
+                                            },
                                         })
                                             .then(res => res.json())
                                             .then(resJson =>
@@ -605,9 +605,9 @@ class Events extends Component
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
-                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                                 },
-                                body: formData
+                                body: formData,
                             })
                                 .then((response) => response.json())
                                 .then((responseJson) =>
@@ -617,8 +617,8 @@ class Events extends Component
                                     {
                                         fetch(`https://restful.injaunja.com/event/full/${this.state.updateId}`, {
                                             headers: {
-                                                'Cache-Control': 'no-cache'
-                                            }
+                                                'Cache-Control': 'no-cache',
+                                            },
                                         })
                                             .then(res => res.json())
                                             .then(resJson =>
@@ -714,23 +714,27 @@ class Events extends Component
 
     showNotifModal(e, event)
     {
+        this.notifModal.style.transition = 'all linear 0s'
         let rect = e.target.getBoundingClientRect()
         let top = rect.top + 'px'
         let left = rect.left + 'px'
         this.notifModal.style.top = top
         this.notifModal.style.left = left
+
         setTimeout(() =>
         {
-            this.notifModal.style.top = 'calc((100% - 450px) / 2)'
-            this.notifModal.style.left = 'calc((100% - 650px) / 2)'
-
             let notification = []
             if (event.notification)
             {
                 notification = JSON.parse(event.notification)
             }
-            this.setState({...this.state, notifModal: true, notif: notification, top, left, event})
-        }, 250)
+            this.setState({...this.state, notifModal: true, notif: notification, top, left, event}, () =>
+            {
+                this.notifModal.style.transition = 'all linear 0.2s'
+                this.notifModal.style.top = 'calc((100% - 450px) / 2)'
+                this.notifModal.style.left = 'calc((100% - 650px) / 2)'
+            })
+        }, 100)
     }
 
     hideNotifModal = () =>
@@ -812,12 +816,12 @@ class Events extends Component
                     headers: {
                         'Content-Type': 'application/json',
                         'Cache-Control': 'no-cache',
-                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                     },
                     body: JSON.stringify({
                         event_id: this.state.event.id,
-                        notification: JSON.stringify(notif)
-                    })
+                        notification: JSON.stringify(notif),
+                    }),
                 })
                     .then((res) => res.json())
                     .then((resJson) =>
@@ -827,8 +831,8 @@ class Events extends Component
 
                             fetch(`https://restful.injaunja.com/event/full/${this.state.event.id}`, {
                                 headers: {
-                                    'Cache-Control': 'no-cache'
-                                }
+                                    'Cache-Control': 'no-cache',
+                                },
                             })
                                 .then(res => res.json())
                                 .then(resJson =>
@@ -914,8 +918,8 @@ class Events extends Component
                                             <div className='event-slick-images'>
                                                 <Slick {...{dots: true}}>
                                                     {
-                                                        JSON.parse(event.pictures) && JSON.parse(event.pictures).map((img,i) =>
-                                                            <CategoryImage key={i} picture={img}/>
+                                                        JSON.parse(event.pictures) && JSON.parse(event.pictures).map((img, i) =>
+                                                            <CategoryImage key={i} picture={img}/>,
                                                         )
                                                     }
                                                 </Slick>
@@ -967,7 +971,7 @@ class Events extends Component
                                     </div>
                                 </div>
 
-                            </CSSTransition>
+                            </CSSTransition>,
                         )
                     }
 
@@ -1070,14 +1074,14 @@ class Events extends Component
                                     this.state.isUpdating && this.state.old_pictures && this.state.old_pictures.map((img, index) =>
                                         <div key={index} className='event-create-modal-preview-cont' onClick={this.deleteOldPhoto.bind(this, index)}>
                                             <img className='event-create-modal-preview' src={img} alt=''/>
-                                        </div>
+                                        </div>,
                                     )
                                 }
                                 {
                                     this.state.previews.map((img, index) =>
                                         <div key={index} className='event-create-modal-preview-cont' onClick={this.deletePhoto.bind(this, index)}>
                                             <img className='event-create-modal-preview' src={img} alt=''/>
-                                        </div>
+                                        </div>,
                                     )
                                 }
                             </div>
@@ -1143,7 +1147,7 @@ class Events extends Component
                                                 />
                                                 <input placeholder='زمان' className='notif-modal-field-time' type='text' defaultValue={notif.time} onChange={(e) => notif.time = e.target.value.trim()}/>
                                                 <Material className='notif-modal-field-del' content='✖' onClick={(i) => this.delNotif(i)}/>
-                                            </div>
+                                            </div>,
                                         )
                                     }
                                 </div>
