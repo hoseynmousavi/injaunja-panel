@@ -12,7 +12,7 @@ class Login extends Component
         this.state = {
             login: null,
             phone: '',
-            username: ''
+            username: '',
         }
     }
 
@@ -28,16 +28,16 @@ class Login extends Component
                     const phone = this.state.phone.trim()
                     const username = this.state.username.trim().toLowerCase()
 
-                    fetch('https://restful.injaunja.com/user/login/admin', {
+                    fetch('http://172.245.10.243:1435/user/login/admin', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Cache-Control': 'no-cache'
+                            'Cache-Control': 'no-cache',
                         },
                         body: JSON.stringify({
                             username: username,
-                            phone: phone
-                        })
+                            phone: phone,
+                        }),
                     })
                         .then((res) => res.json())
                         .then((resJson) =>
@@ -50,6 +50,13 @@ class Login extends Component
                                     localStorage.setItem('username', username)
                                     localStorage.setItem('id', resJson.form.id)
                                     this.props.getData()
+                                })
+                            }
+                            else if (resJson.state === -6)
+                            {
+                                this.props.handleLoading(false).then(() =>
+                                {
+                                    NotificationManager.error('شما دسترسی لازم برای ورود به پنل را ندارید.')
                                 })
                             }
                             else

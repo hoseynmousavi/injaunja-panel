@@ -421,106 +421,117 @@ class Events extends Component
             {
                 if (this.state.name.trim().length > 3 && this.state.start_day && this.state.start_time && this.state.start_time_valid && this.state.end_time && this.state.end_time_valid && this.state.location && (!this.state.is_long || this.state.end_day))
                 {
-                    this.setState({...this.state, isCreating: false}, () =>
+                    if (
+                        (!this.state.is_long && (parseInt(this.state.start_time.split(':')[0], 10) * 60 + parseInt(this.state.start_time.split(':')[1], 10) < parseInt(this.state.end_time.split(':')[0], 10) * 60 + parseInt(this.state.end_time.split(':')[1], 10))) ||
+                        (this.state.is_long && (this.state.start_day + 30 * this.state.start_month + 365 * this.state.start_year <= this.state.end_day + 30 * this.state.end_month + 365 * this.state.end_year))
+                    )
                     {
-                        setTimeout(() => this.setState({...this.state, loading: true}, () =>
+                        this.setState({...this.state, isCreating: false}, () =>
                         {
-                            let formData = new FormData()
-                            formData.append('name', this.state.name.trim())
-                            formData.append('description', this.state.description.trim())
-                            formData.append('info', this.state.info.trim())
-                            formData.append('address', this.state.address.trim())
-                            formData.append('category_id', this.state.category_id)
-                            formData.append('have_rating', this.state.have_rating)
-                            formData.append('is_long', this.state.is_long)
-                            formData.append('creator_id', '1')
-                            formData.append('start_day', this.state.start_day)
-                            formData.append('start_month', this.state.start_month)
-                            formData.append('start_year', this.state.start_year)
-                            formData.append('start_time', this.state.start_time)
-                            formData.append('end_time', this.state.end_time)
-                            formData.append('location', this.state.location)
-
-
-                            if (this.state.is_long)
+                            setTimeout(() => this.setState({...this.state, loading: true}, () =>
                             {
-                                formData.append('end_day', this.state.end_day)
-                                formData.append('end_month', this.state.end_month)
-                                formData.append('end_year', this.state.end_year)
-                            }
+                                let formData = new FormData()
+                                formData.append('name', this.state.name.trim())
+                                formData.append('description', this.state.description.trim())
+                                formData.append('info', this.state.info.trim())
+                                formData.append('address', this.state.address.trim())
+                                formData.append('category_id', this.state.category_id)
+                                formData.append('have_rating', this.state.have_rating)
+                                formData.append('is_long', this.state.is_long)
+                                formData.append('creator_id', '1')
+                                formData.append('start_day', this.state.start_day)
+                                formData.append('start_month', this.state.start_month)
+                                formData.append('start_year', this.state.start_year)
+                                formData.append('start_time', this.state.start_time)
+                                formData.append('end_time', this.state.end_time)
+                                formData.append('location', this.state.location)
 
-                            this.state.pictures.forEach((img, i) =>
-                            {
-                                formData.append(i.toString(), this.state.pictures[i])
-                            })
 
-                            fetch('https://restful.injaunja.com/event/create', {
-                                method: 'POST',
-                                headers: {
-                                    'Cache-Control': 'no-cache',
-                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
-                                },
-                                body: formData,
-                            })
-                                .then((response) => response.json())
-                                .then((responseJson) =>
+                                if (this.state.is_long)
                                 {
-                                    console.log('res: ', responseJson)
-                                    if (responseJson.state === 1)
-                                    {
-                                        const id = responseJson.form.id
+                                    formData.append('end_day', this.state.end_day)
+                                    formData.append('end_month', this.state.end_month)
+                                    formData.append('end_year', this.state.end_year)
+                                }
 
-                                        fetch(`https://restful.injaunja.com/event/full/${id}`, {
-                                            headers: {
-                                                'Cache-Control': 'no-cache',
-                                            },
-                                        })
-                                            .then(res => res.json())
-                                            .then(resJson =>
-                                            {
-                                                if (resJson.state === 1)
+                                this.state.pictures.forEach((img, i) =>
+                                {
+                                    formData.append(i.toString(), this.state.pictures[i])
+                                })
+
+                                fetch('https://restful.injaunja.com/event/create', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Cache-Control': 'no-cache',
+                                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
+                                    },
+                                    body: formData,
+                                })
+                                    .then((response) => response.json())
+                                    .then((responseJson) =>
+                                    {
+                                        console.log('res: ', responseJson)
+                                        if (responseJson.state === 1)
+                                        {
+                                            const id = responseJson.form.id
+
+                                            fetch(`https://restful.injaunja.com/event/full/${id}`, {
+                                                headers: {
+                                                    'Cache-Control': 'no-cache',
+                                                },
+                                            })
+                                                .then(res => res.json())
+                                                .then(resJson =>
                                                 {
-                                                    this.resetState().then(() =>
+                                                    if (resJson.state === 1)
                                                     {
-                                                        this.pictureInput.value = ''
-                                                        this.props.addToEvents(resJson.form)
-                                                        NotificationManager.success('رویداد با موفقیت افزوده شد.')
-                                                    })
-                                                }
-                                                else
+                                                        this.resetState().then(() =>
+                                                        {
+                                                            this.pictureInput.value = ''
+                                                            this.props.addToEvents(resJson.form)
+                                                            NotificationManager.success('رویداد با موفقیت افزوده شد.')
+                                                        })
+                                                    }
+                                                    else
+                                                    {
+                                                        this.setState({...this.state, loading: false}, () =>
+                                                        {
+                                                            NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید.')
+                                                        })
+                                                    }
+                                                })
+                                                .catch(() =>
                                                 {
                                                     this.setState({...this.state, loading: false}, () =>
                                                     {
                                                         NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید.')
                                                     })
-                                                }
-                                            })
-                                            .catch(() =>
-                                            {
-                                                this.setState({...this.state, loading: false}, () =>
-                                                {
-                                                    NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید.')
                                                 })
+                                        }
+                                        else
+                                        {
+                                            this.setState({...this.state, loading: false}, () =>
+                                            {
+                                                console.log(responseJson)
+                                                NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید.')
                                             })
-                                    }
-                                    else
+                                        }
+                                    })
+                                    .catch(() =>
                                     {
                                         this.setState({...this.state, loading: false}, () =>
                                         {
-                                            console.log(responseJson)
-                                            NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید.')
+                                            NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید')
                                         })
-                                    }
-                                })
-                                .catch(() =>
-                                {
-                                    this.setState({...this.state, loading: false}, () =>
-                                    {
-                                        NotificationManager.error('خطایی هنگام برقراری سرور رخ داد. دوباره تلاش کنید')
                                     })
-                                })
-                        }), 300)
-                    })
+                            }), 300)
+                        })
+                    }
+                    else
+                    {
+                        if (this.state.is_long) NotificationManager.error('تاریخ شروع نمی تواند قبل از تاریخ پایان باشد!')
+                        else NotificationManager.error('ساعت شروع نمی تواند قبل از ساعت پایان باشد!')
+                    }
                 }
                 else
                 {

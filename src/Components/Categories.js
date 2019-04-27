@@ -7,6 +7,7 @@ import AddButton from './AddButton'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import CategoryImage from './CategoryImage'
 import {Link} from 'react-router-dom'
+import Fluent from './Fluent'
 
 class Categories extends Component
 {
@@ -25,7 +26,7 @@ class Categories extends Component
             svg: null,
             svgPreview: '',
             isUpdating: false,
-            updateId: 0
+            updateId: 0,
         }
     }
 
@@ -108,9 +109,9 @@ class Categories extends Component
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
-                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                                 },
-                                body: formData
+                                body: formData,
                             })
                                 .then((response) => response.json())
                                 .then((responseJson) =>
@@ -121,8 +122,8 @@ class Categories extends Component
 
                                         fetch(`https://restful.injaunja.com/category/${id}`, {
                                             headers: {
-                                                'Cache-Control': 'no-cache'
-                                            }
+                                                'Cache-Control': 'no-cache',
+                                            },
                                         })
                                             .then(res => res.json())
                                             .then(resJson =>
@@ -213,9 +214,9 @@ class Categories extends Component
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
-                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                                 },
-                                body: formData
+                                body: formData,
                             })
                                 .then((response) => response.json())
                                 .then((responseJson) =>
@@ -224,8 +225,8 @@ class Categories extends Component
                                     {
                                         fetch(`https://restful.injaunja.com/category/${this.state.updateId}`, {
                                             headers: {
-                                                'Cache-Control': 'no-cache'
-                                            }
+                                                'Cache-Control': 'no-cache',
+                                            },
                                         })
                                             .then(res => res.json())
                                             .then(resJson =>
@@ -331,11 +332,11 @@ class Categories extends Component
                     headers: {
                         'Content-Type': 'application/json',
                         'Cache-Control': 'no-cache',
-                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
+                        'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
                     },
                     body: JSON.stringify({
-                        id: id
-                    })
+                        id: id,
+                    }),
                 })
                     .then((res) => res.json())
                     .then((resJson) =>
@@ -382,7 +383,7 @@ class Categories extends Component
             picturePreview: category.picture ? category.picture : '',
             svg: null,
             svgPreview: category.svg ? category.svg : '',
-            selectable: category.selectable
+            selectable: category.selectable,
         })
     }
 
@@ -398,59 +399,62 @@ class Categories extends Component
                                 key={category.id}
                                 classNames='fade'
                                 appear={true}
-                                timeout={{enter: 300, exit: 300}}>
+                                exit={false}
+                                timeout={{enter: 300}}
+                            >
 
-                                <div key={category.id + 'key'} className='category'>
-
-                                    {
-                                        this.props.updateToCategories ?
-                                            <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
-                                                <Pencil className='category-edit'/>
-                                            </div>
-                                            :
-                                            null
-                                    }
-
-                                    {
-                                        this.props.removeCategories ?
-                                            <div className='category-close-cont' onClick={this.handleDelete.bind(this, category.id, category.name)}>
-                                                <div className='category-close'>✕</div>
-                                            </div>
-                                            :
-                                            null
-                                    }
-
-                                    {
-                                        !category.selectable ?
-                                            <Link className='category-link' to={`/Categories/Children/${category.id}`}>
-                                                <CategoryImage picture={category.picture}/>
-                                                <div className='category-name'>{category.name}</div>
-                                                <div className='category-description'>{category.description}</div>
-                                                <div className='category-footer'>
-                                                    <div className='category-date'>ایجاد: {category.create_date}</div>
-                                                    <div className='category-selectable'>قابل انتخاب: {category.selectable ?
-                                                        <div className='category-selectable-logo'>✔</div> :
-                                                        <div className='category-selectable-logo'>✖</div>}
-                                                    </div>
+                                <div className='category-new-cont'>
+                                    <Fluent backgroundColor='white' fluentColor='#35404D' className='category'>
+                                        {
+                                            this.props.updateToCategories ?
+                                                <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
+                                                    <Pencil className='category-edit'/>
                                                 </div>
-                                            </Link>
-                                            :
-                                            <Link className='category-link' to={`/Events/${category.id}`}>
-                                                <CategoryImage picture={category.picture}/>
-                                                <div className='category-name'>{category.name}</div>
-                                                <div className='category-description'>{category.description}</div>
-                                                <div className='category-footer'>
-                                                    <div className='category-date'>ایجاد: {category.create_date}</div>
-                                                    <div className='category-selectable'>قابل انتخاب: {category.selectable ?
-                                                        <div className='category-selectable-logo'>✔</div> :
-                                                        <div className='category-selectable-logo'>✖</div>}
-                                                    </div>
+                                                :
+                                                null
+                                        }
+
+                                        {
+                                            this.props.removeCategories ?
+                                                <div className='category-close-cont' onClick={this.handleDelete.bind(this, category.id, category.name)}>
+                                                    <div className='category-close'>✕</div>
                                                 </div>
-                                            </Link>
-                                    }
+                                                :
+                                                null
+                                        }
+
+                                        {
+                                            !category.selectable ?
+                                                <Link className='category-link' to={`/Categories/Children/${category.id}`}>
+                                                    <CategoryImage picture={category.picture}/>
+                                                    <div className='category-name'>{category.name}</div>
+                                                    <div className='category-description'>{category.description}</div>
+                                                    <div className='category-footer'>
+                                                        <div className='category-date'>ایجاد: {category.create_date}</div>
+                                                        <div className='category-selectable'>قابل انتخاب: {category.selectable ?
+                                                            <div className='category-selectable-logo'>✔</div> :
+                                                            <div className='category-selectable-logo'>✖</div>}
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                                :
+                                                <Link className='category-link' to={`/Events/${category.id}`}>
+                                                    <CategoryImage picture={category.picture}/>
+                                                    <div className='category-name'>{category.name}</div>
+                                                    <div className='category-description'>{category.description}</div>
+                                                    <div className='category-footer'>
+                                                        <div className='category-date'>ایجاد: {category.create_date}</div>
+                                                        <div className='category-selectable'>قابل انتخاب: {category.selectable ?
+                                                            <div className='category-selectable-logo'>✔</div> :
+                                                            <div className='category-selectable-logo'>✖</div>}
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                        }
+                                    </Fluent>
                                 </div>
 
-                            </CSSTransition>
+                            </CSSTransition>,
                         )
                     }
 

@@ -53,8 +53,6 @@
     height: calc(100vh - 90px);
     overflow: auto;
     color: whitesmoke;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
 }
 
 .sideCollapsed {
@@ -69,20 +67,6 @@
     height: calc(100vh - 90px);
     overflow: auto;
     color: whitesmoke;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-.side-item-selected {
-    white-space: nowrap;
-    background-color: #4a5a6c;
-    padding: 12px;
-    margin: 6px 0;
-    border-radius: 5px;
-    font-size: 13px;
-    cursor: pointer;
-    transition-duration: 0.6s;
-    transition-delay: 0.1s;
 }
 
 .side-item-link {
@@ -101,6 +85,19 @@
     border-radius: 5px;
     font-size: 13px;
     cursor: pointer;
+}
+
+
+.side-item-selected {
+    white-space: nowrap;
+    background-color: #4a5a6c;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    transition-duration: 0.6s;
+    transition-delay: 0.1s;
 }
 
 .main {
@@ -220,24 +217,20 @@
     flex-wrap: wrap;
 }
 
-.category {
+.category-new-cont{
     flex-grow: 1;
     width: 300px;
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
-    padding: 0;
     background-color: white;
     margin: 0 10px 20px 10px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 14px;
-    transition: font-size 0s linear 0s, box-shadow 0.3s ease 0s, margin 0.3s ease 0s, width 0.3s ease 0s;
 }
 
-.category:hover {
-    box-shadow: 0 4px 7px 2px rgba(0, 0, 0, 0.1);
-    transition: font-size 0s linear 0s, box-shadow 0.3s ease 0s;
+.category {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .event {
@@ -252,12 +245,10 @@
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 14px;
-    transition: font-size 0s linear 0s, box-shadow 0.3s ease 0s, margin 0.3s ease 0s, width 0.3s ease 0s;
 }
 
 .event:hover {
     box-shadow: 0 4px 7px 2px rgba(0, 0, 0, 0.1);
-    transition: font-size 0s linear 0s, box-shadow 0.3s ease 0s;
 }
 
 .category-img {
@@ -507,7 +498,6 @@
     width: 500px;
     height: 650px;
     z-index: 4;
-    transition: all linear 0.3s;
 }
 
 .category-create-modal-hide {
@@ -522,7 +512,6 @@
     transform: scale(0);
     transform-origin: bottom left;
     border-radius: 200px;
-    transition: all linear 0.3s;
 }
 
 .category-create-close {
@@ -720,7 +709,6 @@
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     z-index: 1;
-    transition-duration: 0.3s;
 }
 
 .event-create-modal-preview-cont:hover::after {
@@ -728,7 +716,6 @@
     width: 40px;
     padding-top: 11px;
     height: 29px;
-    transition-duration: 0.3s;
 }
 
 .event-create-modal-preview {
@@ -872,7 +859,6 @@
     width: 670px;
     height: 653px;
     z-index: 3;
-    transition: all linear 0.3s;
 }
 
 .event-create-modal-hide {
@@ -887,7 +873,6 @@
     transform: scale(0);
     transform-origin: bottom left;
     border-radius: 200px;
-    transition: all linear 0.3s;
 }
 
 .event-create-modal-name {
@@ -1236,7 +1221,6 @@
         height: auto;
         width: 500px;
         z-index: 3;
-        transition: all linear 0.3s;
     }
 
     .event-create-modal {
@@ -1246,35 +1230,26 @@
 
 .fade-appear {
     opacity: 0;
-    transition: all 300ms linear;
 }
 
 .fade-appear.fade-appear-active {
     opacity: 1;
-    transition: all 300ms linear;
 }
 
 .fade-enter {
     opacity: 0;
-    transform: scale(0);
-    transition: all 300ms linear;
+    /*transform: scale(0);*/
 }
 
 .fade-enter.fade-enter-active {
     opacity: 1;
-    transform: scale(1);
-    transition: all 300ms linear;
 }
 
 .fade-exit {
     opacity: 1;
-    transition: all 300ms linear;
-    transform: scale(1);
-    transform-origin: top left;
 }
 
 .fade-exit.fade-exit-active {
-    transition: all 300ms linear;
     opacity: 0;
     position: fixed;
     transform: scale(0);

@@ -39,9 +39,9 @@ class MyDatePicker extends Component
             .then(res => res.json())
             .then(resJson =>
             {
-                let year = resJson[1]
-                let month = resJson[2]
-                let day = resJson[3]
+                let year = parseInt(resJson[1],10).toString()
+                let month = parseInt(resJson[2],10).toString()
+                let day = parseInt(resJson[3],10).toString()
                 this.setState({
                     month: month,
                     year: year,

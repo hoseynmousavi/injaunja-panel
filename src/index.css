@@ -1,4 +1,5 @@
 @import "Styles/App.css";
+@import "Styles/Fluent.css";
 @import "Styles/Material.css";
 @import "Styles/MaterialInput.css";
 @import "Styles/Checkbox.css";
@@ -15,6 +16,7 @@
 }
 
 html, body {
+    overflow-y: scroll;
     margin: 0;
     padding: 0;
     direction: rtl;
@@ -40,7 +42,7 @@ button:focus {
 }
 
 * {
-    transition-duration: 0.3s;
+    transition: all linear 0.3s;
 }
 
 ::-webkit-scrollbar {

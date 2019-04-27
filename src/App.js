@@ -38,7 +38,7 @@ class App extends Component
             const phone = localStorage.getItem('phone')
             const username = localStorage.getItem('username')
 
-            fetch('https://restful.injaunja.com/user/login/admin', {
+            fetch('http://172.245.10.243:1435/user/login/admin', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,11 +83,6 @@ class App extends Component
         {
             this.setState({...this.state, sideOpen: false})
         }
-    }
-
-    componentWillUnmount()
-    {
-        window.removeEventListener('resize', this.handleResize)
     }
 
     getData()
