@@ -506,12 +506,10 @@
     position: fixed;
     bottom: 20px;
     left: 20px;
-    z-index: -1;
-    width: 500px;
-    height: 650px;
-    transform: scale(0);
-    transform-origin: bottom left;
+    width: 52px;
+    height: 52px;
     border-radius: 200px;
+    z-index: -1;
 }
 
 .category-create-close {
@@ -865,13 +863,11 @@
     overflow: hidden;
     background-color: white;
     position: fixed;
+    z-index: -1;
     bottom: 20px;
     left: 20px;
-    z-index: -1;
-    width: 670px;
-    height: 653px;
-    transform: scale(0);
-    transform-origin: bottom left;
+    width: 52px;
+    height: 52px;
     border-radius: 200px;
 }
 
