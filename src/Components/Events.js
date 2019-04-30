@@ -374,7 +374,6 @@ class Events extends Component
             .then((response) => response.json())
             .then((responseJson) =>
             {
-                console.log('res: ', responseJson)
                 if (responseJson.state === 1)
                 {
                     const id = responseJson.form.id
@@ -470,7 +469,6 @@ class Events extends Component
                                     .then((response) => response.json())
                                     .then((responseJson) =>
                                     {
-                                        console.log('res: ', responseJson)
                                         if (responseJson.state === 1)
                                         {
                                             const id = responseJson.form.id
@@ -623,7 +621,6 @@ class Events extends Component
                                 .then((response) => response.json())
                                 .then((responseJson) =>
                                 {
-                                    console.log('res: ', responseJson)
                                     if (responseJson.state === 1)
                                     {
                                         fetch(`https://restful.injaunja.com/event/full/${this.state.updateId}`, {

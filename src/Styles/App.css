@@ -510,6 +510,7 @@
     height: 52px;
     border-radius: 200px;
     z-index: -1;
+    opacity: 0;
 }
 
 .category-create-close {
@@ -869,6 +870,7 @@
     width: 52px;
     height: 52px;
     border-radius: 200px;
+    opacity: 0;
 }
 
 .event-create-modal-name {
