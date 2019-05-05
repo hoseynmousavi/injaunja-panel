@@ -52,6 +52,8 @@ class Events extends Component
             // NOTIFICATION THINGS
             notifModal: false,
             notif: [],
+
+            search: '',
         }
     }
 
@@ -340,11 +342,13 @@ class Events extends Component
     copy(event)
     {
         let formData = new FormData()
+
+        formData.append('category_id', event.category_id) //TODO Hoseyn
+
         formData.append('name', event.name)
         formData.append('description', event.description)
         formData.append('info', event.info)
         formData.append('address', event.address)
-        formData.append('category_id', event.category_id)
         formData.append('have_rating', event.have_rating)
         formData.append('is_long', event.is_long)
         formData.append('creator_id', '1')
@@ -888,21 +892,39 @@ class Events extends Component
         }
     }
 
+    search = (e) => this.setState({...this.state, search: e.target.value})
+
+    removeSearch = () => this.setState({...this.state, search: ''})
+
     render()
     {
+        const eventsArr = this.props.events && this.props.events.filter(p =>
+            p.name.includes(this.state.search) || p.description.includes(this.state.search) || p.info.includes(this.state.search) || p.address.includes(this.state.search),
+        )
+
         return (
             <div>
-                <div className='category-item-header'>{this.props.header}</div>
+
+                {this.props.header && <div className='event-item-header'>{this.props.header}</div>}
+
+                {
+                    this.props.events && this.props.events.length > 0 && <div className='event-search-fluent'>
+                        <input type='text' className='category-search' value={this.state.search} placeholder='جست و جو ...' onChange={this.search}/>
+                        <div className='category-close-search' onClick={this.removeSearch}>✕</div>
+                    </div>
+                }
+
                 <TransitionGroup className='category-cont'>
                     {
-                        this.props.events.map((event) =>
+                        eventsArr.map((event) =>
                             <CSSTransition
                                 key={event.id}
                                 classNames='fade'
                                 appear={true}
-                                timeout={{enter: 300, exit: 300}}>
+                                exit={false}
+                                timeout={{enter: 300}}>
 
-                                <div key={event.id + 'key'} className='event'>
+                                <div className='event'>
 
                                     <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, event)}>
                                         <Pencil className='category-edit'/>

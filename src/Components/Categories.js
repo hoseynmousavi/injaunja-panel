@@ -27,6 +27,7 @@ class Categories extends Component
             svgPreview: '',
             isUpdating: false,
             updateId: 0,
+            search: '',
         }
     }
 
@@ -387,24 +388,42 @@ class Categories extends Component
         })
     }
 
+    search = (e) => this.setState({...this.state, search: e.target.value})
+
+    removeSearch = () => this.setState({...this.state, search: ''})
+
     render()
     {
+        const categoriesArr = this.props.categories && this.props.categories.filter(p =>
+            p.name.includes(this.state.search) || p.description.includes(this.state.search),
+        )
+
         return (
-            <div>
-                {this.props.header ? <div className='category-item-header'>{this.props.header}</div> : null}
+            <React.Fragment>
+                {
+                    this.props.header && <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category-search-fluent'>
+                        <div className='category-item-header'>{this.props.header}</div>
+                    </Fluent>
+                }
+                {
+                    this.props.categories && this.props.categories.length > 0 && <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category-search-fluent'>
+                        <input type='text' className='category-search' value={this.state.search} placeholder='جست و جو ...' onChange={this.search}/>
+                        <div className='category-close-search' onClick={this.removeSearch}>✕</div>
+                    </Fluent>
+                }
+
                 <TransitionGroup className='category-cont'>
                     {
-                        this.props.categories.map((category) =>
+                        categoriesArr.map((category) =>
                             <CSSTransition
                                 key={category.id}
                                 classNames='fade'
                                 appear={true}
                                 exit={false}
-                                timeout={{enter: 300}}
-                            >
+                                timeout={{enter: 300}}>
 
                                 <div className='category-new-cont'>
-                                    <Fluent backgroundColor='white' fluentColor='#35404D' className='category'>
+                                    <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category'>
                                         {
                                             this.props.updateToCategories ?
                                                 <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
@@ -523,7 +542,7 @@ class Categories extends Component
                     }
 
                 </TransitionGroup>
-            </div>
+            </React.Fragment>
         )
     }
 }
