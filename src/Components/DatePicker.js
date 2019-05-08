@@ -24,7 +24,7 @@ class MyDatePicker extends Component
                 thisMonth: '',
                 thisDay: '',
                 thisYear: '',
-                value: this.props.defaultValue ? this.props.defaultValue : ''
+                value: this.props.defaultValue ? this.props.defaultValue : '',
             }
         this.outside = this.outside.bind(this)
     }
@@ -33,21 +33,21 @@ class MyDatePicker extends Component
     {
         fetch('https://api.kaho.ir/DatePicker', {
             headers: {
-                'Cache-Control': 'no-cache'
-            }
+                'Cache-Control': 'no-cache',
+            },
         })
             .then(res => res.json())
             .then(resJson =>
             {
-                let year = parseInt(resJson[1],10).toString()
-                let month = parseInt(resJson[2],10).toString()
-                let day = parseInt(resJson[3],10).toString()
+                let year = parseInt(resJson[1], 10).toString()
+                let month = parseInt(resJson[2], 10).toString()
+                let day = parseInt(resJson[3], 10).toString()
                 this.setState({
                     month: month,
                     year: year,
                     thisDay: day,
                     thisMonth: month,
-                    thisYear: year
+                    thisYear: year,
                 })
             })
 
@@ -181,11 +181,11 @@ class MyDatePicker extends Component
             this.daysOfWeek.style.height = '40px'
 
 
-            return this.state.firstSixMonth.map(p =>
+            return this.state.firstSixMonth.map((p, index) =>
             {
                 if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
                 {
-                    return <button className='date-picker-this-day' onClick={() =>
+                    return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -200,7 +200,7 @@ class MyDatePicker extends Component
                 }
                 else
                 {
-                    return <button className='date-picker-day' onClick={() =>
+                    return <button key={index} className='date-picker-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -219,11 +219,11 @@ class MyDatePicker extends Component
         {
             this.daysOfWeek.style.height = '40px'
 
-            return this.state.secondFiveMonth.map(p =>
+            return this.state.secondFiveMonth.map((p, index) =>
             {
                 if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
                 {
-                    return <button className='date-picker-this-day' onClick={() =>
+                    return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -238,7 +238,7 @@ class MyDatePicker extends Component
                 }
                 else
                 {
-                    return <button className='date-picker-day' onClick={() =>
+                    return <button key={index} className='date-picker-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -257,11 +257,11 @@ class MyDatePicker extends Component
         {
             this.daysOfWeek.style.height = '40px'
 
-            return this.state.esfand.map(p =>
+            return this.state.esfand.map((p, index) =>
             {
                 if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
                 {
-                    return <button className='date-picker-this-day' onClick={() =>
+                    return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -276,7 +276,7 @@ class MyDatePicker extends Component
                 }
                 else
                 {
-                    return <button className='date-picker-day' onClick={() =>
+                    return <button key={index} className='date-picker-day' onClick={() =>
                     {
                         // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
                         const value = this.state.year + '/' + this.state.month + '/' + p
@@ -294,12 +294,11 @@ class MyDatePicker extends Component
 
         else if (month === 0)
         {
-
             this.daysOfWeek.style.height = '0px'
             this.emp.style.width = '0px'
 
-            return this.state.months.map(p =>
-                <button className='date-picker-month-0' onClick={() =>
+            return this.state.months.map((p, index) =>
+                <button key={index} className='date-picker-month-0' onClick={() =>
                 {
                     let mon = (this.state.months.indexOf(p) + 1).toString()
                     if (mon.length === 1)
@@ -307,7 +306,7 @@ class MyDatePicker extends Component
                     this.setState({month: mon})
                 }}>
                     {p}
-                </button>
+                </button>,
             )
         }
     }
@@ -430,7 +429,7 @@ class MyDatePicker extends Component
                                        if (e.target.value.length === 4)
                                        {
                                            this.setState({
-                                               year: e.target.value
+                                               year: e.target.value,
                                            })
                                            e.target.value = ''
                                        }
@@ -478,16 +477,16 @@ class MyDatePicker extends Component
                         }
                         {/*<button className='date-picker-cancel' onClick={() =>*/}
                         {/*{*/}
-                            {/*if (this.props.btnFunction)*/}
-                            {/*{*/}
-                                {/*this.props.btnFunction()*/}
-                            {/*}*/}
-                            {/*else*/}
-                            {/*{*/}
-                                {/*this.container.style.display = 'none'*/}
-                            {/*}*/}
+                        {/*if (this.props.btnFunction)*/}
+                        {/*{*/}
+                        {/*this.props.btnFunction()*/}
+                        {/*}*/}
+                        {/*else*/}
+                        {/*{*/}
+                        {/*this.container.style.display = 'none'*/}
+                        {/*}*/}
                         {/*}}>*/}
-                            {/*{this.props.btnText ? this.props.btnText : 'لـــغــو'}*/}
+                        {/*{this.props.btnText ? this.props.btnText : 'لـــغــو'}*/}
                         {/*</button>*/}
                     </div>
                 </div>

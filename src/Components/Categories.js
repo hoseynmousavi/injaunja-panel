@@ -476,72 +476,71 @@ class Categories extends Component
                             </CSSTransition>,
                         )
                     }
+                </TransitionGroup>
 
-                    <div className={this.state.isCreating ? 'modal' : 'modal-hide'}/>
-                    <div className={this.state.isCreating ? 'category-create-modal' : 'category-create-modal-hide'}>
+                <div className={this.state.isCreating ? 'modal' : 'modal-hide'}/>
+                <div className={this.state.isCreating ? 'category-create-modal' : 'category-create-modal-hide'}>
 
-                        <div className='category-create-close' onClick={this.handleClose}>✖</div>
+                    <div className='category-create-close' onClick={this.handleClose}>✖</div>
 
-                        <div className='category-create-modal-title'>ایجاد دسته بندی</div>
-                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.name : undefined}
-                                       className='category-create-modal-name'
-                                       reload={!this.state.isCreating}
-                                       backgroundColor='white'
-                                       type='text'
-                                       label='نام *'
-                                       getValue={this.handleName}
-                        />
-                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.description : undefined}
-                                       className='category-create-modal-desc'
-                                       reload={!this.state.isCreating}
-                                       backgroundColor='white'
-                                       type='text'
-                                       label='توضیحات *'
-                                       isTextArea={true}
-                                       getValue={this.handleDescription}
-                        />
+                    <div className='category-create-modal-title'>ایجاد دسته بندی</div>
+                    <MaterialInput defaultValue={this.state.isUpdating ? this.state.name : undefined}
+                                   className='category-create-modal-name'
+                                   reload={!this.state.isCreating}
+                                   backgroundColor='white'
+                                   type='text'
+                                   label='نام *'
+                                   getValue={this.handleName}
+                    />
+                    <MaterialInput defaultValue={this.state.isUpdating ? this.state.description : undefined}
+                                   className='category-create-modal-desc'
+                                   reload={!this.state.isCreating}
+                                   backgroundColor='white'
+                                   type='text'
+                                   label='توضیحات *'
+                                   isTextArea={true}
+                                   getValue={this.handleDescription}
+                    />
 
-                        <div className='category-create-modal-pic'>
-                            {
-                                this.state.picturePreview.length > 0 ?
-                                    <img className='category-create-modal-pic-img' src={this.state.picturePreview} alt=''/>
-                                    :
-                                    'عکس را انتخاب کنید'
-                            }
-                            <input type='file' ref={e => this.pictureInput = e} accept='.jpg,.jpeg' className='category-create-modal-pic-input' onChange={this.handlePicture}/>
-                        </div>
-
-                        <div className='category-create-modal-pic'>
-                            {
-                                this.state.svgPreview.length > 0 ?
-                                    <img className='category-create-modal-pic-img' src={this.state.svgPreview} alt=''/>
-                                    :
-                                    'svg را انتخاب کنید'
-                            }
-                            <input type='file' ref={e => this.svgInput = e} accept='.svg' className='category-create-modal-pic-input' onChange={this.handleSvg}/>
-                        </div>
-
-                        <div className='category-create-modal-select'>
-
-                            قابل انتخاب:
-
-                            <div className='slideThree'>
-                                <input type='checkbox' id='slideThree' checked={this.state.selectable} onChange={this.handleSelect}/>
-                                <label htmlFor='slideThree'/>
-                            </div>
-                        </div>
-
-                        <Material className='category-create-modal-submit' content='تـایـیـد' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}/>
+                    <div className='category-create-modal-pic'>
+                        {
+                            this.state.picturePreview.length > 0 ?
+                                <img className='category-create-modal-pic-img' src={this.state.picturePreview} alt=''/>
+                                :
+                                'عکس را انتخاب کنید'
+                        }
+                        <input type='file' ref={e => this.pictureInput = e} accept='.jpg,.jpeg' className='category-create-modal-pic-input' onChange={this.handlePicture}/>
                     </div>
 
-                    {
-                        this.props.addToCategories ?
-                            <AddButton loading={this.state.loading} onClick={this.handleCreating}/>
-                            :
-                            <span/>
-                    }
+                    <div className='category-create-modal-pic'>
+                        {
+                            this.state.svgPreview.length > 0 ?
+                                <img className='category-create-modal-pic-img' src={this.state.svgPreview} alt=''/>
+                                :
+                                'svg را انتخاب کنید'
+                        }
+                        <input type='file' ref={e => this.svgInput = e} accept='.svg' className='category-create-modal-pic-input' onChange={this.handleSvg}/>
+                    </div>
 
-                </TransitionGroup>
+                    <div className='category-create-modal-select'>
+
+                        قابل انتخاب:
+
+                        <div className='slideThree'>
+                            <input type='checkbox' id='slideThree' checked={this.state.selectable} onChange={this.handleSelect}/>
+                            <label htmlFor='slideThree'/>
+                        </div>
+                    </div>
+
+                    <Material className='category-create-modal-submit' content='تـایـیـد' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}/>
+                </div>
+
+                {
+                    this.props.addToCategories ?
+                        <AddButton loading={this.state.loading} onClick={this.handleCreating}/>
+                        :
+                        <span/>
+                }
             </React.Fragment>
         )
     }

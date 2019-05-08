@@ -1004,198 +1004,197 @@ class Events extends Component
                             </CSSTransition>,
                         )
                     }
+                </TransitionGroup>
 
-                    <div className={this.state.isCreating || this.state.notifModal ? 'modal' : 'modal-hide'}/>
-                    <div className={this.state.isCreating ? 'event-create-modal' : 'event-create-modal-hide'}>
+                <div className={this.state.isCreating || this.state.notifModal ? 'modal' : 'modal-hide'}/>
+                <div className={this.state.isCreating ? 'event-create-modal' : 'event-create-modal-hide'}>
 
-                        <div className='category-create-close' onClick={this.handleClose}>✖</div>
+                    <div className='category-create-close' onClick={this.handleClose}>✖</div>
 
-                        <div className='category-create-level'>2 / {this.state.level}</div>
+                    <div className='category-create-level'>2 / {this.state.level}</div>
 
-                        <div className='category-create-modal-title'>ایجاد رویداد</div>
+                    <div className='category-create-modal-title'>ایجاد رویداد</div>
 
-                        <div className={this.state.level === 1 ? 'event-create-modal-firstLevel' : 'event-create-modal-firstLevel-hide'}>
-                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.name : undefined}
-                                           className='event-create-modal-name'
+                    <div className={this.state.level === 1 ? 'event-create-modal-firstLevel' : 'event-create-modal-firstLevel-hide'}>
+                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.name : undefined}
+                                       className='event-create-modal-name'
+                                       reload={!this.state.isCreating}
+                                       backgroundColor='white'
+                                       type='text'
+                                       label='نام *'
+                                       getValue={this.handleName}
+                        />
+                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.address : undefined}
+                                       className='event-create-modal-name'
+                                       reload={!this.state.isCreating}
+                                       backgroundColor='white'
+                                       type='text'
+                                       label='آدرس'
+                                       getValue={this.handleAddress}
+                        />
+
+                        <div className='event-create-modal-select'>
+
+                            رویداد بیش از یک روز است؟
+
+                            <div className='slideThree'>
+                                <input type='checkbox' id='slideThreee' checked={this.state.is_long} onChange={this.handleLong}/>
+                                <label htmlFor='slideThreee'/>
+                            </div>
+                        </div>
+
+                        <div className='event-create-modal-buttons'>
+                            <MyDatePicker defaultValue={this.state.isUpdating ? this.state.start_year + '/' + this.state.start_month + '/' + this.state.start_day : undefined}
+                                          className={this.state.is_long ? 'event-create-modal-date1' : 'event-create-modal-date-all'}
+                                          placeHolder='تاریخ شروع *'
+                                          getValue={this.handleStartDate}
+                                          reload={!this.state.isCreating}
+
+                            />
+                            <MyDatePicker defaultValue={this.state.isUpdating && this.state.is_long ? this.state.end_year + '/' + this.state.end_month + '/' + this.state.end_day : undefined}
+                                          className={this.state.is_long ? 'event-create-modal-date' : 'event-create-modal-date hide'}
+                                          placeHolder='تاریخ پایان *'
+                                          getValue={this.handleEndDate}
+                                          reload={!this.state.isCreating}
+                            />
+                        </div>
+
+                        <div className='event-create-modal-buttons'>
+                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.start_time : undefined}
+                                           className='event-create-modal-time'
                                            reload={!this.state.isCreating}
                                            backgroundColor='white'
                                            type='text'
-                                           label='نام *'
-                                           getValue={this.handleName}
+                                           label='ساعت شروع *'
+                                           getValue={this.handleStartTime}
+                                           borderColor={!this.state.start_time_valid ? 'red' : null}
                             />
-                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.address : undefined}
-                                           className='event-create-modal-name'
+
+                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.end_time : undefined}
+                                           className='event-create-modal-time'
                                            reload={!this.state.isCreating}
                                            backgroundColor='white'
                                            type='text'
-                                           label='آدرس'
-                                           getValue={this.handleAddress}
+                                           label='ساعت پایان *'
+                                           getValue={this.handleEndTime}
+                                           borderColor={!this.state.end_time_valid ? 'red' : null}
                             />
+                        </div>
 
-                            <div className='event-create-modal-select'>
+                        <div className='event-create-modal-hint'>
+                            مثال: 2:05 ، 13:05
+                        </div>
 
-                                رویداد بیش از یک روز است؟
+                        <div className='event-create-modal-select'>
 
-                                <div className='slideThree'>
-                                    <input type='checkbox' id='slideThreee' checked={this.state.is_long} onChange={this.handleLong}/>
-                                    <label htmlFor='slideThreee'/>
-                                </div>
+                            نظر سنجی دارد؟
+
+                            <div className='slideThree'>
+                                <input type='checkbox' id='slideThree' checked={this.state.have_rating} onChange={this.handleRating}/>
+                                <label htmlFor='slideThree'/>
                             </div>
+                        </div>
 
-                            <div className='event-create-modal-buttons'>
-                                <MyDatePicker defaultValue={this.state.isUpdating ? this.state.start_year + '/' + this.state.start_month + '/' + this.state.start_day : undefined}
-                                              className={this.state.is_long ? 'event-create-modal-date1' : 'event-create-modal-date-all'}
-                                              placeHolder='تاریخ شروع *'
-                                              getValue={this.handleStartDate}
-                                              reload={!this.state.isCreating}
+                        <div className='event-create-modal-pic'>
+                            عکس را انتخاب کنید
+                            <input type='file' ref={e => this.pictureInput = e} accept='.jpg,.jpeg' className='category-create-modal-pic-input' onChange={this.handlePicture}/>
+                        </div>
 
-                                />
-                                <MyDatePicker defaultValue={this.state.isUpdating && this.state.is_long ? this.state.end_year + '/' + this.state.end_month + '/' + this.state.end_day : undefined}
-                                              className={this.state.is_long ? 'event-create-modal-date' : 'event-create-modal-date hide'}
-                                              placeHolder='تاریخ پایان *'
-                                              getValue={this.handleEndDate}
-                                              reload={!this.state.isCreating}
-                                />
-                            </div>
-
-                            <div className='event-create-modal-buttons'>
-                                <MaterialInput defaultValue={this.state.isUpdating ? this.state.start_time : undefined}
-                                               className='event-create-modal-time'
-                                               reload={!this.state.isCreating}
-                                               backgroundColor='white'
-                                               type='text'
-                                               label='ساعت شروع *'
-                                               getValue={this.handleStartTime}
-                                               borderColor={!this.state.start_time_valid ? 'red' : null}
-                                />
-
-                                <MaterialInput defaultValue={this.state.isUpdating ? this.state.end_time : undefined}
-                                               className='event-create-modal-time'
-                                               reload={!this.state.isCreating}
-                                               backgroundColor='white'
-                                               type='text'
-                                               label='ساعت پایان *'
-                                               getValue={this.handleEndTime}
-                                               borderColor={!this.state.end_time_valid ? 'red' : null}
-                                />
-                            </div>
-
-                            <div className='event-create-modal-hint'>
-                                مثال: 2:05 ، 13:05
-                            </div>
-
-                            <div className='event-create-modal-select'>
-
-                                نظر سنجی دارد؟
-
-                                <div className='slideThree'>
-                                    <input type='checkbox' id='slideThree' checked={this.state.have_rating} onChange={this.handleRating}/>
-                                    <label htmlFor='slideThree'/>
-                                </div>
-                            </div>
-
-                            <div className='event-create-modal-pic'>
-                                عکس را انتخاب کنید
-                                <input type='file' ref={e => this.pictureInput = e} accept='.jpg,.jpeg' className='category-create-modal-pic-input' onChange={this.handlePicture}/>
-                            </div>
-
-                            <div className='event-create-modal-pictures'>
-                                {
-                                    this.state.isUpdating && this.state.old_pictures && this.state.old_pictures.map((img, index) =>
-                                        <div key={index} className='event-create-modal-preview-cont' onClick={this.deleteOldPhoto.bind(this, index)}>
-                                            <img className='event-create-modal-preview' src={img} alt=''/>
-                                        </div>,
-                                    )
-                                }
-                                {
-                                    this.state.previews.map((img, index) =>
-                                        <div key={index} className='event-create-modal-preview-cont' onClick={this.deletePhoto.bind(this, index)}>
-                                            <img className='event-create-modal-preview' src={img} alt=''/>
-                                        </div>,
-                                    )
-                                }
-                            </div>
+                        <div className='event-create-modal-pictures'>
                             {
-                                this.state.isUpdating ?
-                                    <div className='event-create-modal-buttons'>
-                                        <Material className='event-create-modal-button-cancel' content='حـذف' backgroundColor='rgba(255,255,255,0.5)' onClick={this.handleDelete.bind(this, this.state.updateId, this.state.name)}/>
-                                        <Material className='event-create-modal-button' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
-                                    </div>
-                                    :
-                                    <Material className='event-create-modal-submit' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
+                                this.state.isUpdating && this.state.old_pictures && this.state.old_pictures.map((img, index) =>
+                                    <div key={index} className='event-create-modal-preview-cont' onClick={this.deleteOldPhoto.bind(this, index)}>
+                                        <img className='event-create-modal-preview' src={img} alt=''/>
+                                    </div>,
+                                )
+                            }
+                            {
+                                this.state.previews.map((img, index) =>
+                                    <div key={index} className='event-create-modal-preview-cont' onClick={this.deletePhoto.bind(this, index)}>
+                                        <img className='event-create-modal-preview' src={img} alt=''/>
+                                    </div>,
+                                )
                             }
                         </div>
-                        <div className={this.state.level === 2 ? 'event-create-modal-firstLevel' : 'event-create-modal-secondLevel-hide'}>
-                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.description : undefined}
-                                           className='event-create-modal-desc'
-                                           reload={!this.state.isCreating}
-                                           backgroundColor='white'
-                                           type='text'
-                                           label='توضیحات'
-                                           isTextArea={true}
-                                           getValue={this.handleDescription}
-                            />
-                            <MaterialInput defaultValue={this.state.isUpdating ? this.state.info : undefined}
-                                           className='event-create-modal-desc'
-                                           reload={!this.state.isCreating}
-                                           backgroundColor='white'
-                                           type='text'
-                                           label='اطلاعات'
-                                           isTextArea={true}
-                                           getValue={this.handleInfo}
-                            />
-
-                            <div className='event-create-modal-map'>
-                                <FancyMaps id={this.state.updateId} pin={this.state.isUpdating ? this.state.location : null} disableChange={false} getPin={this.setPin}/>
-                            </div>
-                            <div className='event-create-modal-buttons'>
-                                <Material className='event-create-modal-button-cancel' content='قـبـلی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.firstLevel}/>
-                                <Material className='event-create-modal-button' content='ثـبـت' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}/>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div ref={e => this.notifModal = e} className={this.state.notifModal ? 'notif-modal' : 'notif-modal-hide'}>
-                        <div className='notif-create-close' onClick={this.hideNotifModal}>✖</div>
-                        <div className='category-create-submit' onClick={this.submitNotif}>✔</div>
-                        <Material className='category-create-add' onClick={this.addNotif} content='+' backgroundColor='rgba(0,0,0,0.3)'/>
-
                         {
-                            this.state.notif.length > 0 ?
-                                <div className='notif-modal-cont'>
-                                    {
-                                        this.state.notif.map((notif, i) =>
-                                            <div key={i} className='notif-modal-container'>
-                                                <input placeholder='عنوان' className='notif-modal-field' type='text' defaultValue={notif.title} onChange={(e) => notif.title = e.target.value.trim()}/>
-                                                <textarea placeholder='توضیحات' className='notif-modal-field-dec' defaultValue={notif.description} onChange={(e) => notif.description = e.target.value.trim()}/>
-                                                <MyDatePicker defaultValue={notif.date}
-                                                              className='notif-modal-field-date'
-                                                              placeHolder='تاریخ'
-                                                              getValue={(date) => notif.date = date}
-                                                              reload={!this.state.notifModal}
-                                                />
-                                                <input placeholder='زمان' className='notif-modal-field-time' type='text' defaultValue={notif.time} onChange={(e) => notif.time = e.target.value.trim()}/>
-                                                <Material className='notif-modal-field-del' content='✖' onClick={(i) => this.delNotif(i)}/>
-                                            </div>,
-                                        )
-                                    }
+                            this.state.isUpdating ?
+                                <div className='event-create-modal-buttons'>
+                                    <Material className='event-create-modal-button-cancel' content='حـذف' backgroundColor='rgba(255,255,255,0.5)' onClick={this.handleDelete.bind(this, this.state.updateId, this.state.name)}/>
+                                    <Material className='event-create-modal-button' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
                                 </div>
                                 :
-                                <div className='notif-modal-none'>نوتیفیکیشنی وجود ندارد !</div>
+                                <Material className='event-create-modal-submit' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
                         }
-
                     </div>
+                    <div className={this.state.level === 2 ? 'event-create-modal-firstLevel' : 'event-create-modal-secondLevel-hide'}>
+                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.description : undefined}
+                                       className='event-create-modal-desc'
+                                       reload={!this.state.isCreating}
+                                       backgroundColor='white'
+                                       type='text'
+                                       label='توضیحات'
+                                       isTextArea={true}
+                                       getValue={this.handleDescription}
+                        />
+                        <MaterialInput defaultValue={this.state.isUpdating ? this.state.info : undefined}
+                                       className='event-create-modal-desc'
+                                       reload={!this.state.isCreating}
+                                       backgroundColor='white'
+                                       type='text'
+                                       label='اطلاعات'
+                                       isTextArea={true}
+                                       getValue={this.handleInfo}
+                        />
 
+                        <div className='event-create-modal-map'>
+                            <FancyMaps id={this.state.updateId} pin={this.state.isUpdating ? this.state.location : null} disableChange={false} getPin={this.setPin}/>
+                        </div>
+                        <div className='event-create-modal-buttons'>
+                            <Material className='event-create-modal-button-cancel' content='قـبـلی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.firstLevel}/>
+                            <Material className='event-create-modal-button' content='ثـبـت' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ref={e => this.notifModal = e} className={this.state.notifModal ? 'notif-modal' : 'notif-modal-hide'}>
+                    <div className='notif-create-close' onClick={this.hideNotifModal}>✖</div>
+                    <div className='category-create-submit' onClick={this.submitNotif}>✔</div>
+                    <Material className='category-create-add' onClick={this.addNotif} content='+' backgroundColor='rgba(0,0,0,0.3)'/>
 
                     {
-                        this.props.addToEvents ?
-                            <AddButton loading={this.state.loading} onClick={this.handleCreating}/>
+                        this.state.notif.length > 0 ?
+                            <div className='notif-modal-cont'>
+                                {
+                                    this.state.notif.map((notif, i) =>
+                                        <div key={i} className='notif-modal-container'>
+                                            <input placeholder='عنوان' className='notif-modal-field' type='text' defaultValue={notif.title} onChange={(e) => notif.title = e.target.value.trim()}/>
+                                            <textarea placeholder='توضیحات' className='notif-modal-field-dec' defaultValue={notif.description} onChange={(e) => notif.description = e.target.value.trim()}/>
+                                            <MyDatePicker defaultValue={notif.date}
+                                                          className='notif-modal-field-date'
+                                                          placeHolder='تاریخ'
+                                                          getValue={(date) => notif.date = date}
+                                                          reload={!this.state.notifModal}
+                                            />
+                                            <input placeholder='زمان' className='notif-modal-field-time' type='text' defaultValue={notif.time} onChange={(e) => notif.time = e.target.value.trim()}/>
+                                            <Material className='notif-modal-field-del' content='✖' onClick={(i) => this.delNotif(i)}/>
+                                        </div>,
+                                    )
+                                }
+                            </div>
                             :
-                            <span/>
+                            <div className='notif-modal-none'>نوتیفیکیشنی وجود ندارد !</div>
                     }
 
-                </TransitionGroup>
+                </div>
+
+
+                {
+                    this.props.addToEvents ?
+                        <AddButton loading={this.state.loading} onClick={this.handleCreating}/>
+                        :
+                        <span/>
+                }
             </div>
         )
     }
