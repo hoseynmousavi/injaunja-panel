@@ -19,8 +19,8 @@
 }
 
 .header-hamburger-cont {
-    transition-duration: 1s;
-    background-color: #cccccc;
+    transition-duration: 0.6s;
+    background-color: rgba(204, 204, 204, 0.7);
     margin: 11px;
     cursor: pointer;
     display: inline-block;

@@ -401,12 +401,12 @@ class Categories extends Component
         return (
             <React.Fragment>
                 {
-                    this.props.header && <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category-search-fluent'>
+                    this.props.header && <Fluent backgroundColor='white' fluentColor='#cccccc' className='category-search-fluent'>
                         <div className='category-item-header'>{this.props.header}</div>
                     </Fluent>
                 }
                 {
-                    this.props.categories && this.props.categories.length > 0 && <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category-search-fluent'>
+                    this.props.categories && this.props.categories.length > 0 && <Fluent backgroundColor='white' fluentColor='#cccccc' className='category-search-fluent'>
                         <input type='text' className='category-search' value={this.state.search} placeholder='جست و جو ...' onChange={this.search}/>
                         <div className='category-close-search' onClick={this.removeSearch}>✕</div>
                     </Fluent>
@@ -423,7 +423,7 @@ class Categories extends Component
                                 timeout={{enter: 300}}>
 
                                 <div className='category-new-cont'>
-                                    <Fluent backgroundColor='white' fluentColor='#4a5a6c' className='category'>
+                                    <Fluent backgroundColor='white' fluentColor='#cccccc' className='category'>
                                         {
                                             this.props.updateToCategories ?
                                                 <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
