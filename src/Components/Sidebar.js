@@ -8,7 +8,7 @@ class Sidebar extends Component
     {
         super(props)
         this.state = {
-            selected: ''
+            selected: '',
         }
     }
 
@@ -54,7 +54,10 @@ class Sidebar extends Component
 
     select(selected)
     {
-        this.setState({...this.state, selected: selected})
+        this.setState({...this.state, selected: selected}, () =>
+        {
+            if (document.body.clientWidth <= 1000 && this.props.sideOpen) this.props.handleSide()
+        })
     }
 
     render()

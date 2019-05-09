@@ -20,7 +20,7 @@ class App extends Component
             categories: [],
             events: [],
             users: [],
-            redirect: false
+            redirect: false,
         }
         this.handleResize = this.handleResize.bind(this)
     }
@@ -42,12 +42,12 @@ class App extends Component
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
+                    'Cache-Control': 'no-cache',
                 },
                 body: JSON.stringify({
                     username: username,
-                    phone: phone
-                })
+                    phone: phone,
+                }),
             })
                 .then((res) => res.json())
                 .then((resJson) =>
@@ -87,12 +87,12 @@ class App extends Component
 
     getData()
     {
-        this.setState({...this.state, loading: true}, () =>
+        this.setState({...this.state, redirect: false, loading: true}, () =>
         {
             fetch('https://restful.injaunja.com/category', {
                 headers: {
-                    'Cache-Control': 'no-cache'
-                }
+                    'Cache-Control': 'no-cache',
+                },
             })
                 .then(res => res.json())
                 .then(resJson =>
@@ -103,8 +103,8 @@ class App extends Component
                         {
                             fetch('https://restful.injaunja.com/event', {
                                 headers: {
-                                    'Cache-Control': 'no-cache'
-                                }
+                                    'Cache-Control': 'no-cache',
+                                },
                             })
                                 .then(res => res.json())
                                 .then(resJson =>
@@ -116,8 +116,8 @@ class App extends Component
                                             fetch('https://restful.injaunja.com/user/admin', {
                                                 headers: {
                                                     'Cache-Control': 'no-cache',
-                                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp'
-                                                }
+                                                    'auth': 'QEFiZWxtaXJpIEBIb3NleW5tb3VzYXZp',
+                                                },
                                             })
                                                 .then(res => res.json())
                                                 .then(resJson =>
@@ -292,13 +292,10 @@ class App extends Component
     render()
     {
         return (
-            <div>
+            <React.Fragment>
 
                 {
-                    this.state.redirect ?
-                        <Redirect to='/login'/>
-                        :
-                        null
+                    this.state.redirect && <Redirect to='/login'/>
                 }
 
                 <Switch>
@@ -310,7 +307,7 @@ class App extends Component
                         <React.Fragment>
 
                             <Header sideOpen={this.state.sideOpen} handleSide={this.handleSide}/>
-                            <Sidebar sideOpen={this.state.sideOpen}/>
+                            <Sidebar sideOpen={this.state.sideOpen} handleSide={this.handleSide}/>
 
                             <main ref={e => this.main = e} className={this.state.sideOpen ? 'main-collapse' : 'main'} onClick={this.handleCollapseMain}>
                                 <Switch>
@@ -375,7 +372,7 @@ class App extends Component
 
                 <NotificationContainer/>
 
-            </div>
+            </React.Fragment>
         )
     }
 }

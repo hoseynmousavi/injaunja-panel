@@ -5,23 +5,14 @@ class CategoryImage extends Component
     constructor(props)
     {
         super(props)
-        this.state = {
-            isLoaded: null
-        }
+        this.state = {isLoaded: null}
     }
 
     componentDidMount()
     {
         let img = new Image()
         img.src = this.props.picture
-        img.onload = () =>
-        {
-            this.setState({...this.state, isLoaded: true})
-        }
-        img.onerror = () =>
-        {
-            this.setState({...this.state, isLoaded: false})
-        }
+        img.onload = () => this.setState({...this.state, isLoaded: true})
     }
 
     render()

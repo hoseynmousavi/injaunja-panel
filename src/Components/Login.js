@@ -88,34 +88,18 @@ class Login extends Component
         }, 400)
     }
 
-    redirectToHome()
-    {
-        if (this.state.login === true)
-            return <Redirect to='/'/>
-    }
+    handlePhone = (value) => this.setState({...this.state, phone: value})
 
-    handlePhone = (value) =>
-    {
-        this.setState({...this.state, phone: value})
-    }
+    handleUsername = (value) => this.setState({...this.state, username: value})
 
-    handleUsername = (value) =>
-    {
-        this.setState({...this.state, username: value})
-    }
-
-    handleEnter = (e) =>
-    {
-        if (e.keyCode === 13)
-            this.login()
-    }
+    handleEnter = (e) => e.keyCode === 13 && this.login()
 
     render()
     {
         return (
             <div className='login-form'>
                 {
-                    this.redirectToHome()
+                    this.state.login && <Redirect to='/'/>
                 }
                 <div className='login-form-title'>ورود</div>
                 <MaterialInput getValue={this.handlePhone} onKeyDown={this.handleEnter} maxLength={11} type='text' label='شماره تلفن' className='login-input' backgroundColor='#F1F2F7'/>
