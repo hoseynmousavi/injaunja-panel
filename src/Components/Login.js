@@ -104,7 +104,7 @@ class Login extends Component
                 <div className='login-form-title'>ورود</div>
                 <MaterialInput getValue={this.handlePhone} onKeyDown={this.handleEnter} maxLength={11} type='text' label='شماره تلفن' className='login-input' backgroundColor='#F1F2F7'/>
                 <MaterialInput getValue={this.handleUsername} onKeyDown={this.handleEnter} type='password' label='نام کاربری' className='login-input' backgroundColor='#F1F2F7'/>
-                <Material backgroundColor='rgba(241,242,247,0.6)' className='login-form-submit' content='ورود' onClick={this.login}/>
+                <Material backgroundColor='rgba(241,242,247,0.6)' className='login-form-submit' onClick={this.login}>ورود</Material>
             </div>
         )
     }

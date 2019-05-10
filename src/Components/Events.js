@@ -1119,11 +1119,11 @@ class Events extends Component
                         {
                             this.state.isUpdating ?
                                 <div className='event-create-modal-buttons'>
-                                    <Material className='event-create-modal-button-cancel' content='حـذف' backgroundColor='rgba(255,255,255,0.5)' onClick={this.handleDelete.bind(this, this.state.updateId, this.state.name)}/>
-                                    <Material className='event-create-modal-button' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
+                                    <Material className='event-create-modal-button-cancel' backgroundColor='rgba(255,255,255,0.5)' onClick={this.handleDelete.bind(this, this.state.updateId, this.state.name)}>حـذف</Material>
+                                    <Material className='event-create-modal-button' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}>بـعـدی</Material>
                                 </div>
                                 :
-                                <Material className='event-create-modal-submit' content='بـعـدی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}/>
+                                <Material className='event-create-modal-submit' backgroundColor='rgba(255,255,255,0.5)' onClick={this.secondLevel}>بـعـدی</Material>
                         }
                     </div>
                     <div className={this.state.level === 2 ? 'event-create-modal-firstLevel' : 'event-create-modal-secondLevel-hide'}>
@@ -1150,8 +1150,8 @@ class Events extends Component
                             <FancyMaps id={this.state.updateId} pin={this.state.isUpdating ? this.state.location : null} disableChange={false} getPin={this.setPin}/>
                         </div>
                         <div className='event-create-modal-buttons'>
-                            <Material className='event-create-modal-button-cancel' content='قـبـلی' backgroundColor='rgba(255,255,255,0.5)' onClick={this.firstLevel}/>
-                            <Material className='event-create-modal-button' content='ثـبـت' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}/>
+                            <Material className='event-create-modal-button-cancel' backgroundColor='rgba(255,255,255,0.5)' onClick={this.firstLevel}>قـبـلی</Material>
+                            <Material className='event-create-modal-button' backgroundColor='rgba(255,255,255,0.5)' onClick={this.submit}>ثـبـت</Material>
                         </div>
                     </div>
                 </div>
@@ -1160,7 +1160,7 @@ class Events extends Component
                 <div ref={e => this.notifModal = e} className={this.state.notifModal ? 'notif-modal' : 'notif-modal-hide'}>
                     <div className='notif-create-close' onClick={this.hideNotifModal}>✖</div>
                     <div className='category-create-submit' onClick={this.submitNotif}>✔</div>
-                    <Material className='category-create-add' onClick={this.addNotif} content='+' backgroundColor='rgba(0,0,0,0.3)'/>
+                    <Material className='category-create-add' onClick={this.addNotif} backgroundColor='rgba(0,0,0,0.3)'>+</Material>
 
                     {
                         this.state.notif.length > 0 ?
@@ -1177,7 +1177,7 @@ class Events extends Component
                                                           reload={!this.state.notifModal}
                                             />
                                             <input placeholder='زمان' className='notif-modal-field-time' type='text' defaultValue={notif.time} onChange={(e) => notif.time = e.target.value.trim()}/>
-                                            <Material className='notif-modal-field-del' content='✖' onClick={(i) => this.delNotif(i)}/>
+                                            <Material className='notif-modal-field-del' onClick={(i) => this.delNotif(i)}>✖</Material>
                                         </div>,
                                     )
                                 }

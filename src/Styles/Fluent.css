@@ -9,8 +9,10 @@
 
 .fluent-content{
     height: 100%;
+    width: 100%;
     opacity: 1;
     border-radius: inherit;
+    background-color: inherit;
 }
 
 .fluent-design {

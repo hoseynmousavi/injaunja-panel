@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Material from './Material'
 import {Link} from 'react-router-dom'
+import Fluent from './Fluent'
 
 class Sidebar extends Component
 {
@@ -65,13 +66,19 @@ class Sidebar extends Component
         return (
             <div className={this.props.sideOpen ? 'side' : 'sideCollapsed'}>
                 <Link to='/Categories' className='side-item-link'>
-                    <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'category' ? 'side-item-selected' : 'side-item'} onClick={() => this.select('category')} content='دستـه‌بندی‌ هـا'/>
+                    <Fluent className='side-item-fluent' fluentColor='#4a5a6c' onClick={() => this.select('category')}>
+                        <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'category' ? 'side-item-selected' : 'side-item'}>دستـه‌بندی‌ هـا</Material>
+                    </Fluent>
                 </Link>
                 <Link to='/Events' className='side-item-link'>
-                    <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'event' ? 'side-item-selected' : 'side-item'} onClick={() => this.select('event')} content='رویـــــداد هـا'/>
+                    <Fluent className='side-item-fluent' fluentColor='#4a5a6c' onClick={() => this.select('event')}>
+                        <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'event' ? 'side-item-selected' : 'side-item'}>رویـــــداد هـا</Material>
+                    </Fluent>
                 </Link>
                 <Link to='/Users' className='side-item-link'>
-                    <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'user' ? 'side-item-selected' : 'side-item'} onClick={() => this.select('user')} content="کـــاربـــر هـا"/>
+                    <Fluent className='side-item-fluent' fluentColor='#4a5a6c' onClick={() => this.select('user')}>
+                        <Material backgroundColor='rgba(74, 90, 108,0.6)' className={this.state.selected === 'user' ? 'side-item-selected' : 'side-item'}>کـــاربـــر هـا</Material>
+                    </Fluent>
                 </Link>
             </div>
         )

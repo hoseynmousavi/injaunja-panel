@@ -6,7 +6,6 @@ class Fluent extends Component
     static propTypes = {
         className: PropTypes.string,
         borderWidth: PropTypes.string,
-        backgroundColor: PropTypes.string.isRequired,
         fluentColor: PropTypes.string,
         onClick: PropTypes.func,
     }
@@ -24,6 +23,11 @@ class Fluent extends Component
     componentDidMount()
     {
         document.addEventListener('mousemove', this.mouseMove)
+    }
+
+    componentWillUnmount()
+    {
+        document.removeEventListener('mousemove', this.mouseMove)
     }
 
     mouseMove(e)
@@ -115,19 +119,19 @@ class Fluent extends Component
     render()
     {
         const {sign, opacity} = this.state
-        const {onClick, className, children, fluentColor, borderWidth, backgroundColor} = this.props
+        const {onClick, className, children, fluentColor, borderWidth} = this.props
 
         return (
             <div className={className ? className + ' fluent-container' : 'fluent-container'}
-                 style={{padding: borderWidth ? borderWidth : '2px', background: backgroundColor ? backgroundColor : 'white'}}
-                 onClick={onClick}
-            >
+                 style={{padding: borderWidth ? borderWidth : '2px'}}
+                 onClick={onClick}>
+
                 <div className='fluent-design' style={{background: `linear-gradient(to top right, transparent, transparent, ${fluentColor ? fluentColor : '#424242'})`, opacity: sign === 1 || sign === 5 ? opacity : 0}}/>
                 <div className='fluent-design' style={{background: `linear-gradient(to top left, transparent, transparent, ${fluentColor ? fluentColor : '#424242'})`, opacity: sign === 2 || sign === 5 ? opacity : 0}}/>
                 <div className='fluent-design' style={{background: `linear-gradient(to bottom right, transparent, transparent, ${fluentColor ? fluentColor : '#424242'})`, opacity: sign === 3 || sign === 5 ? opacity : 0}}/>
                 <div className='fluent-design' style={{background: `linear-gradient(to bottom left, transparent, transparent, ${fluentColor ? fluentColor : '#424242'})`, opacity: sign === 4 || sign === 5 ? opacity : 0}}/>
 
-                <div ref={e => this.fluent = e} className='fluent-content' style={backgroundColor ? {backgroundColor} : {}}>
+                <div ref={e => this.fluent = e} className='fluent-content'>
                     {children}
                 </div>
             </div>
