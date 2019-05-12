@@ -4,7 +4,6 @@ import MaterialInput from './MaterialInput'
 import Material from './Material'
 import {NotificationManager} from 'react-notifications'
 import AddButton from './AddButton'
-import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import CategoryImage from './CategoryImage'
 import {Link} from 'react-router-dom'
 import Fluent from './Fluent'
@@ -412,71 +411,62 @@ class Categories extends Component
                     </Fluent>
                 }
 
-                <TransitionGroup className='category-cont'>
+                <div className='category-cont'>
                     {
                         categoriesArr.map((category) =>
-                            <CSSTransition
-                                key={category.id}
-                                classNames='fade'
-                                appear={true}
-                                exit={false}
-                                timeout={{enter: 300}}>
+                            <div key={category.id} className='category-new-cont'>
+                                <Fluent fluentColor='#b9b9b9' className='category'>
+                                    {
+                                        this.props.updateToCategories ?
+                                            <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
+                                                <Pencil className='category-edit'/>
+                                            </div>
+                                            :
+                                            null
+                                    }
 
-                                <div className='category-new-cont'>
-                                    <Fluent fluentColor='#b9b9b9' className='category'>
-                                        {
-                                            this.props.updateToCategories ?
-                                                <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, category)}>
-                                                    <Pencil className='category-edit'/>
-                                                </div>
-                                                :
-                                                null
-                                        }
+                                    {
+                                        this.props.removeCategories ?
+                                            <div className='category-close-cont' onClick={this.handleDelete.bind(this, category.id, category.name)}>
+                                                <div className='category-close'>✕</div>
+                                            </div>
+                                            :
+                                            null
+                                    }
 
-                                        {
-                                            this.props.removeCategories ?
-                                                <div className='category-close-cont' onClick={this.handleDelete.bind(this, category.id, category.name)}>
-                                                    <div className='category-close'>✕</div>
-                                                </div>
-                                                :
-                                                null
-                                        }
-
-                                        {
-                                            !category.selectable ?
-                                                <Link className='category-link' to={`/Categories/Children/${category.id}`}>
-                                                    <CategoryImage picture={category.picture}/>
-                                                    <div className='category-name'>{category.name}</div>
-                                                    <div className='category-description'>{category.description}</div>
-                                                    <div className='category-footer'>
-                                                        <div className='category-date'>ایجاد: {category.create_date}</div>
-                                                        <div className='category-selectable'>قابل انتخاب: {category.selectable ?
-                                                            <div className='category-selectable-logo'>✔</div> :
-                                                            <div className='category-selectable-logo'>✖</div>}
-                                                        </div>
+                                    {
+                                        !category.selectable ?
+                                            <Link className='category-link' to={`/Categories/Children/${category.id}`}>
+                                                <CategoryImage picture={category.picture}/>
+                                                <div className='category-name'>{category.name}</div>
+                                                <div className='category-description'>{category.description}</div>
+                                                <div className='category-footer'>
+                                                    <div className='category-date'>ایجاد: {category.create_date}</div>
+                                                    <div className='category-selectable'>قابل انتخاب: {category.selectable ?
+                                                        <div className='category-selectable-logo'>✔</div> :
+                                                        <div className='category-selectable-logo'>✖</div>}
                                                     </div>
-                                                </Link>
-                                                :
-                                                <Link className='category-link' to={`/Events/${category.id}`}>
-                                                    <CategoryImage picture={category.picture}/>
-                                                    <div className='category-name'>{category.name}</div>
-                                                    <div className='category-description'>{category.description}</div>
-                                                    <div className='category-footer'>
-                                                        <div className='category-date'>ایجاد: {category.create_date}</div>
-                                                        <div className='category-selectable'>قابل انتخاب: {category.selectable ?
-                                                            <div className='category-selectable-logo'>✔</div> :
-                                                            <div className='category-selectable-logo'>✖</div>}
-                                                        </div>
+                                                </div>
+                                            </Link>
+                                            :
+                                            <Link className='category-link' to={`/Events/${category.id}`}>
+                                                <CategoryImage picture={category.picture}/>
+                                                <div className='category-name'>{category.name}</div>
+                                                <div className='category-description'>{category.description}</div>
+                                                <div className='category-footer'>
+                                                    <div className='category-date'>ایجاد: {category.create_date}</div>
+                                                    <div className='category-selectable'>قابل انتخاب: {category.selectable ?
+                                                        <div className='category-selectable-logo'>✔</div> :
+                                                        <div className='category-selectable-logo'>✖</div>}
                                                     </div>
-                                                </Link>
-                                        }
-                                    </Fluent>
-                                </div>
-
-                            </CSSTransition>,
+                                                </div>
+                                            </Link>
+                                    }
+                                </Fluent>
+                            </div>,
                         )
                     }
-                </TransitionGroup>
+                </div>
 
                 <div className={this.state.isCreating ? 'modal' : 'modal-hide'}/>
                 <div className={this.state.isCreating ? 'category-create-modal' : 'category-create-modal-hide'}>

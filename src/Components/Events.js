@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import Pencil from '../Media/Images/Pencil'
 import CategoryImage from './CategoryImage'
 import AddButton from './AddButton'
@@ -914,97 +913,88 @@ class Events extends Component
                     </div>
                 }
 
-                <TransitionGroup className='category-cont'>
+                <div className='category-cont'>
                     {
                         eventsArr.map((event) =>
-                            <CSSTransition
-                                key={event.id}
-                                classNames='fade'
-                                appear={true}
-                                exit={false}
-                                timeout={{enter: 300}}>
+                            <div key={event.id} className='event'>
 
-                                <div className='event'>
+                                <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, event)}>
+                                    <Pencil className='category-edit'/>
+                                </div>
 
-                                    <div className='category-edit-cont' onClick={this.handleUpdate.bind(this, event)}>
-                                        <Pencil className='category-edit'/>
-                                    </div>
-
-                                    <div className='category-close-cont' onClick={(e) => this.showNotifModal(e, event)}>
-                                        {
-                                            event.notification && JSON.parse(event.notification).length > 0 ?
-                                                <img className='event-notif' src={Notif} alt=''/>
-                                                :
-                                                <img className='event-notif' src={NoneNotif} alt=''/>
-                                        }
-                                    </div>
-
-                                    <div className='copy-cont'>
-                                        <img className='copy' src={Copy} alt='' onClick={this.copy.bind(this, event)}/>
-                                    </div>
-
+                                <div className='category-close-cont' onClick={(e) => this.showNotifModal(e, event)}>
                                     {
-                                        event.pictures && JSON.parse(event.pictures).length > 0 ?
-                                            <div className='event-slick-images'>
-                                                <Slick {...{dots: true}}>
-                                                    {
-                                                        JSON.parse(event.pictures) && JSON.parse(event.pictures).map((img, i) =>
-                                                            <CategoryImage key={i} picture={img}/>,
-                                                        )
-                                                    }
-                                                </Slick>
-                                            </div>
-                                            : null
+                                        event.notification && JSON.parse(event.notification).length > 0 ?
+                                            <img className='event-notif' src={Notif} alt=''/>
+                                            :
+                                            <img className='event-notif' src={NoneNotif} alt=''/>
                                     }
+                                </div>
 
-                                    <div className='event-name'>{event.name}</div>
-                                    <div className='category-address'>
-                                        {
-                                            event.description ?
-                                                <span>
+                                <div className='copy-cont'>
+                                    <img className='copy' src={Copy} alt='' onClick={this.copy.bind(this, event)}/>
+                                </div>
+
+                                {
+                                    event.pictures && JSON.parse(event.pictures).length > 0 ?
+                                        <div className='event-slick-images'>
+                                            <Slick {...{dots: true}}>
+                                                {
+                                                    JSON.parse(event.pictures) && JSON.parse(event.pictures).map((img, i) =>
+                                                        <CategoryImage key={i} picture={img}/>,
+                                                    )
+                                                }
+                                            </Slick>
+                                        </div>
+                                        : null
+                                }
+
+                                <div className='event-name'>{event.name}</div>
+                                <div className='category-address'>
+                                    {
+                                        event.description ?
+                                            <span>
                                                     <span className='category-description-title'>توضیحات: </span>
                                                     <span>{event.description}</span>
                                                 </span>
-                                                : null
-                                        }
-                                    </div>
-                                    <div className='event-info'>
-                                        {
-                                            event.info ?
-                                                <span>
+                                            : null
+                                    }
+                                </div>
+                                <div className='event-info'>
+                                    {
+                                        event.info ?
+                                            <span>
                                                     <span className='category-description-title'>اطلاعات: </span>
                                                     <span>{event.info}</span>
                                                 </span>
-                                                : null
-                                        }
-                                    </div>
-                                    <div className='event-description'>
-                                        {
-                                            event.address ?
-                                                <span>
+                                            : null
+                                    }
+                                </div>
+                                <div className='event-description'>
+                                    {
+                                        event.address ?
+                                            <span>
                                                     <span className='category-description-title'>آدرس: </span>
                                                     <span>{event.address}</span>
                                                 </span>
-                                                : null
-                                        }
-                                    </div>
-                                    <div className='event-location'>
-                                        <FancyMaps pin={event.location} disableChange={true} disableSearch={true}/>
-                                    </div>
-                                    <div className='category-footer'>
-                                        <div className='category-date'>شروع: {event.start_year + '/' + event.start_month + '/' + event.start_day}</div>
-                                        <div className='category-selectable'>پایان: {
-                                            event.end_day ?
-                                                event.end_year + '/' + event.end_month + '/' + event.end_day :
-                                                event.start_year + '/' + event.start_month + '/' + event.start_day}
-                                        </div>
+                                            : null
+                                    }
+                                </div>
+                                <div className='event-location'>
+                                    <FancyMaps pin={event.location} disableChange={true} disableSearch={true}/>
+                                </div>
+                                <div className='category-footer'>
+                                    <div className='category-date'>شروع: {event.start_year + '/' + event.start_month + '/' + event.start_day}</div>
+                                    <div className='category-selectable'>پایان: {
+                                        event.end_day ?
+                                            event.end_year + '/' + event.end_month + '/' + event.end_day :
+                                            event.start_year + '/' + event.start_month + '/' + event.start_day}
                                     </div>
                                 </div>
-
-                            </CSSTransition>,
+                            </div>,
                         )
                     }
-                </TransitionGroup>
+                </div>
 
                 <div className={this.state.isCreating || this.state.notifModal ? 'modal' : 'modal-hide'}/>
                 <div className={this.state.isCreating ? 'event-create-modal' : 'event-create-modal-hide'}>
