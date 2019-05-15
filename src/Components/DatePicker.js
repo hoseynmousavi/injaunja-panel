@@ -8,19 +8,12 @@ class MyDatePicker extends Component
         super(props)
         this.state =
             {
-                defaultValue: null,
-
                 firstSixMonth: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-
                 secondFiveMonth: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-
                 esfand: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-
                 months: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
-
                 month: '',
                 year: '',
-
                 thisMonth: '',
                 thisDay: '',
                 thisYear: '',
@@ -39,9 +32,9 @@ class MyDatePicker extends Component
             .then(res => res.json())
             .then(resJson =>
             {
-                let year = parseInt(resJson[1], 10).toString()
-                let month = parseInt(resJson[2], 10).toString()
-                let day = parseInt(resJson[3], 10).toString()
+                let year = parseInt(resJson[1], 10)
+                let month = parseInt(resJson[2], 10)
+                let day = parseInt(resJson[3], 10)
                 this.setState({
                     month: month,
                     year: year,
@@ -84,7 +77,7 @@ class MyDatePicker extends Component
 
     renderMonth()
     {
-        let month = parseInt(this.state.month)
+        const {month} = this.state
         if (month === 1)
         {
             return 'فروردین'
@@ -137,13 +130,12 @@ class MyDatePicker extends Component
 
     renderDays()
     {
-        let month = parseInt(this.state.month)
+        let {month, year} = this.state
 
-        if (parseInt(this.state.year) > 0)
+        if (year > 0)
         {
-            let day = new JDate([parseInt(this.state.year), month, 1])
+            let day = new JDate([year, month, 1])
             let letter = day.format('dddd')
-
             if (letter === 'شنبه')
             {
                 this.emp.style.width = '0px'
@@ -177,18 +169,17 @@ class MyDatePicker extends Component
 
         if (month >= 1 && month <= 6)
         {
+            const {firstSixMonth, thisDay, thisMonth, thisYear} = this.state
 
             this.daysOfWeek.style.height = '40px'
 
-
-            return this.state.firstSixMonth.map((p, index) =>
+            return firstSixMonth.map((p, index) =>
             {
-                if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
+                if (thisDay === p && thisMonth === month && thisYear === year)
                 {
                     return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -202,8 +193,7 @@ class MyDatePicker extends Component
                 {
                     return <button key={index} className='date-picker-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -217,16 +207,17 @@ class MyDatePicker extends Component
         }
         else if (month >= 7 && month <= 11)
         {
+            const {secondFiveMonth, thisDay, thisMonth, thisYear} = this.state
+
             this.daysOfWeek.style.height = '40px'
 
-            return this.state.secondFiveMonth.map((p, index) =>
+            return secondFiveMonth.map((p, index) =>
             {
-                if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
+                if (thisDay === p && thisMonth === month && thisYear === year)
                 {
                     return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -240,8 +231,7 @@ class MyDatePicker extends Component
                 {
                     return <button key={index} className='date-picker-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -255,16 +245,17 @@ class MyDatePicker extends Component
         }
         else if (month === 12)
         {
+            const {esfand, thisDay, thisMonth, thisYear} = this.state
+
             this.daysOfWeek.style.height = '40px'
 
-            return this.state.esfand.map((p, index) =>
+            return esfand.map((p, index) =>
             {
-                if ((parseInt(this.state.thisDay)) === p && (parseInt(this.state.thisMonth)) === (parseInt(this.state.month)) && (parseInt(this.state.thisYear)) === (parseInt(this.state.year)))
+                if (thisDay === p && thisMonth === month && thisYear === year)
                 {
                     return <button key={index} className='date-picker-this-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -278,8 +269,7 @@ class MyDatePicker extends Component
                 {
                     return <button key={index} className='date-picker-day' onClick={() =>
                     {
-                        // const value = this.state.year + '/' + this.state.month + '/' + ('0' + p).slice(-2)
-                        const value = this.state.year + '/' + this.state.month + '/' + p
+                        const value = year + '/' + month + '/' + p
                         this.setState({...this.state, value}, () =>
                         {
                             this.container.style.display = 'none'
@@ -294,16 +284,15 @@ class MyDatePicker extends Component
 
         else if (month === 0)
         {
+            const {months} = this.state
+
             this.daysOfWeek.style.height = '0px'
             this.emp.style.width = '0px'
 
-            return this.state.months.map((p, index) =>
+            return months.map((p, index) =>
                 <button key={index} className='date-picker-month-0' onClick={() =>
                 {
-                    let mon = (this.state.months.indexOf(p) + 1).toString()
-                    if (mon.length === 1)
-                        mon = '0' + mon
-                    this.setState({month: mon})
+                    this.setState({month: months.indexOf(p) + 1})
                 }}>
                     {p}
                 </button>,
@@ -311,141 +300,103 @@ class MyDatePicker extends Component
         }
     }
 
-    goPreviousMonth()
+    goPreviousMonth = () =>
     {
-        let month = parseInt(this.state.month)
-        let year = parseInt(this.state.year)
+        let {month, year} = this.state
         if (month !== 0)
         {
             if ((month - 1) >= 1)
             {
                 month--
-                month = month.toString()
-                // if (month.length === 1)
-                //     month = '0' + month
-
                 this.setState({month})
             }
             else
             {
                 year--
-                year = year.toString()
-                if (year.length === 1)
-                    year = '0' + year
-
                 month = 12
-                month = month.toString()
-                // if (month.length === 1)
-                //     month = '0' + month
-
                 this.setState({month, year})
             }
         }
         else
         {
             year--
-            year = year.toString()
-            if (year.length === 1)
-                year = '0' + year
-
             this.setState({year})
         }
     }
 
-    goNextMonth()
+    goNextMonth = () =>
     {
-        let month = parseInt(this.state.month)
-        let year = parseInt(this.state.year)
+        let {month, year} = this.state
         if (month !== 0)
         {
             if ((month + 1) <= 12)
             {
                 month++
-                month = month.toString()
-                // if (month.length === 1)
-                //     month = '0' + month
-
                 this.setState({month})
             }
             else
             {
                 year++
-                year = year.toString()
-                if (year.length === 1)
-                    year = '0' + year
-
                 month = 1
-                month = month.toString()
-                // if (month.length === 1)
-                //     month = '0' + month
-
                 this.setState({month, year})
             }
         }
         else
         {
             year++
-            year = year.toString()
-            if (year.length === 1)
-                year = '0' + year
-
             this.setState({year})
+        }
+    }
+
+    inputYear = (e) =>
+    {
+        if (e.target.value.length > 4) e.target.value = e.target.value.slice(0, 4)
+    }
+
+    blurYear = (e) =>
+    {
+        if (e.target.value.length === 4)
+        {
+            this.setState({year: parseInt(e.target.value, 10)}, () => e.target.value = '')
+        }
+        else
+        {
+            e.target.value = ''
         }
     }
 
     render()
     {
+        const {className, placeHolder} = this.props
+        const {value, year} = this.state
+
         return (
             <div className='date-picker-container' ref={e => this.main = e}>
-                <input className={this.props.className ? this.props.className : 'date-picker-input'}
+                <input className={className ? className : 'date-picker-input'}
                        type="text"
-                       value={!this.state.value.includes('null') ? this.state.value : ''}
+                       value={!value.includes('null') ? value : ''}
                        onFocus={() => this.container.style.display = 'block'}
                        onChange={() => this.setState({...this.state, value: ''})}
-                       placeholder={this.props.placeHolder}
+                       placeholder={placeHolder}
                 />
                 <div ref={e => this.container = e} className='date-picker-calendar'>
-                    <div style={{borderBottom: '1px solid #555555'}}>
-                        <button className='date-picker-left-arrow' onClick={() => this.goPreviousMonth()}>
+                    <div className='date-picker-buttons'>
+                        <button className='date-picker-left-arrow' onClick={this.goPreviousMonth}>
                             ❮
                         </button>
-
-                        <button className='date-picker-show-year' onClick={() => this.setState({month: '0'})}>
+                        <button className='date-picker-show-year' onClick={() => this.setState({month: 0})}>
                             {
                                 this.renderMonth()
                             }
                             <span> </span>
-                            <input type='number' className='date-picker-year'
-                                   placeholder={this.state.year}
-                                   onInput={(e) =>
-                                   {
-                                       if (e.target.value.length > 4)
-                                       {
-                                           e.target.value = e.target.value.slice(0, 4)
-                                       }
-                                   }}
-                                   onBlur={(e) =>
-                                   {
-                                       if (e.target.value.length === 4)
-                                       {
-                                           this.setState({
-                                               year: e.target.value,
-                                           })
-                                           e.target.value = ''
-                                       }
-                                       else
-                                       {
-                                           e.target.value = ''
-                                       }
-                                   }}/>
+                            <input type='number' className='date-picker-year' placeholder={year} onInput={this.inputYear} onBlur={this.blurYear}/>
                         </button>
-
-                        <button className='date-picker-right-arrow' onClick={() => this.goNextMonth()}>
+                        <button className='date-picker-right-arrow' onClick={this.goNextMonth}>
                             ❯
                         </button>
                     </div>
 
-                    <div ref={e => this.daysOfWeek = e} style={{textAlign: 'right', height: '0px', overflowY: 'hidden', transitionDuration: '0.3s'}}>
+                    <div ref={e => this.daysOfWeek = e} className='date-picker-days'>
                         <button className='date-picker-show-day'>
                             شنبه
                         </button>
@@ -468,26 +419,13 @@ class MyDatePicker extends Component
                             جمعه
                         </button>
                     </div>
-                    <div style={{textAlign: 'right'}}>
+                    <div className='date-picker-days-show'>
                         <div ref={e => this.emp = e} className='date-picker-empty'>
                             <span> </span>
                         </div>
                         {
                             this.renderDays()
                         }
-                        {/*<button className='date-picker-cancel' onClick={() =>*/}
-                        {/*{*/}
-                        {/*if (this.props.btnFunction)*/}
-                        {/*{*/}
-                        {/*this.props.btnFunction()*/}
-                        {/*}*/}
-                        {/*else*/}
-                        {/*{*/}
-                        {/*this.container.style.display = 'none'*/}
-                        {/*}*/}
-                        {/*}}>*/}
-                        {/*{this.props.btnText ? this.props.btnText : 'لـــغــو'}*/}
-                        {/*</button>*/}
                     </div>
                 </div>
             </div>

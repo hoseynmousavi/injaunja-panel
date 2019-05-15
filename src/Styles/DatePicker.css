@@ -28,7 +28,8 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
     width: 42.85px;
     height: 40px;
-    font-weight: bold
+    font-weight: bold;
+    transition-duration: 0s;
 }
 
 .date-picker-this-day:hover {
@@ -44,7 +45,8 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
     width: 42.85px;
     height: 40px;
-    font-weight: bold
+    font-weight: bold;
+    transition-duration: 0s;
 }
 
 .date-picker-day:hover {
@@ -59,7 +61,8 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid #EEEEEE;
     width: 100px;
     height: 40px;
-    font-weight: bold
+    font-weight: bold;
+    transition-duration: 0s;
 }
 
 .date-picker-month-0:hover {
@@ -137,6 +140,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     font-weight: bold;
     overflow-x: hidden;
+    transition-duration: 0s;
 }
 
 .date-picker-cancel {
@@ -189,4 +193,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 .date-picker-input:focus {
     outline: none;
+}
+
+.date-picker-days {
+    text-align: right;
+    height: 0;
+    overflow-y: hidden;
+    transition-duration: 0s;
+}
+
+.date-picker-days-show {
+    text-align: right;
+    transition-duration: 0s;
+}
+
+.date-picker-buttons {
+    border-bottom: 1px solid #555555;
 }
