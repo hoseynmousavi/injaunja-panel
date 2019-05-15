@@ -6,14 +6,15 @@ class MaterialInput extends Component
     static propTypes = {
         className: PropTypes.string.isRequired,
         backgroundColor: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         getValue: PropTypes.func.isRequired,
+        type: PropTypes.string,
         maxLength: PropTypes.number,
         isTextArea: PropTypes.bool,
         reload: PropTypes.bool,
         defaultValue: PropTypes.string,
         borderColor: PropTypes.string,
+        name: PropTypes.string,
     }
 
     constructor(props)
@@ -47,10 +48,14 @@ class MaterialInput extends Component
     handleChange(e)
     {
         const value = e.target.value
-        this.setState({...this.state, value}, () =>
+        const {maxLength} = this.props
+        if ((!maxLength) || (maxLength && value.length <= maxLength))
         {
-            this.props.getValue(value)
-        })
+            this.setState({...this.state, value}, () =>
+            {
+                this.props.getValue(value)
+            })
+        }
     }
 
     handleFocus()
@@ -76,7 +81,7 @@ class MaterialInput extends Component
 
     render()
     {
-        const {className, isTextArea, maxLength, borderColor, type, label, backgroundColor} = this.props
+        const {className, isTextArea, maxLength, borderColor, type, label, backgroundColor, name} = this.props
         const {focused, value} = this.state
 
         return (
@@ -84,6 +89,7 @@ class MaterialInput extends Component
                 {
                     isTextArea ?
                         <textarea maxLength={maxLength}
+                                  name={name}
                                   ref={e => this.textRef = e}
                                   className='material-input-textarea'
                                   value={value}
@@ -96,7 +102,7 @@ class MaterialInput extends Component
                         :
                         <input type={type ? type : 'text'}
                                maxLength={maxLength}
-                               autoComplete="new-password"
+                               name={name}
                                ref={e => this.textRef = e}
                                className='material-input-text'
                                value={value}
@@ -108,7 +114,7 @@ class MaterialInput extends Component
                         />
                 }
 
-                <label className={focused || value.trim().length > 0 ? 'material-input-label-out' : 'material-input-label'}
+                <label className={focused || value.length > 0 ? 'material-input-label-out' : 'material-input-label'}
                        style={{backgroundColor: backgroundColor ? backgroundColor : 'white'}}
                        onClick={this.handleClick}>
                     {label}

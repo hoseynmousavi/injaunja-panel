@@ -38,7 +38,7 @@ class App extends Component
             const phone = localStorage.getItem('phone')
             const username = localStorage.getItem('username')
 
-            fetch('http://172.245.10.243:1435/user/login/admin', {
+            fetch('https://restful.injaunja.com/user/login/admin', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',

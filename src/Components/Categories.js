@@ -481,6 +481,7 @@ class Categories extends Component
                                    type='text'
                                    label='نام *'
                                    getValue={this.handleName}
+                                   name='name'
                     />
                     <MaterialInput defaultValue={this.state.isUpdating ? this.state.description : undefined}
                                    className='category-create-modal-desc'
@@ -490,6 +491,7 @@ class Categories extends Component
                                    label='توضیحات *'
                                    isTextArea={true}
                                    getValue={this.handleDescription}
+                                   name='description'
                     />
 
                     <div className='category-create-modal-pic'>

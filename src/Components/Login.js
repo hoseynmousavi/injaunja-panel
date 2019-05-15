@@ -28,7 +28,7 @@ class Login extends Component
                     const phone = this.state.phone.trim()
                     const username = this.state.username.trim().toLowerCase()
 
-                    fetch('http://172.245.10.243:1435/user/login/admin', {
+                    fetch('https://restful.injaunja.com/user/login/admin', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json',
@@ -102,8 +102,8 @@ class Login extends Component
                     this.state.login && <Redirect to='/'/>
                 }
                 <div className='login-form-title'>ورود</div>
-                <MaterialInput getValue={this.handlePhone} onKeyDown={this.handleEnter} maxLength={11} type='text' label='شماره تلفن' className='login-input' backgroundColor='#F1F2F7'/>
-                <MaterialInput getValue={this.handleUsername} onKeyDown={this.handleEnter} type='password' label='نام کاربری' className='login-input' backgroundColor='#F1F2F7'/>
+                <MaterialInput name='phone' getValue={this.handlePhone} onKeyDown={this.handleEnter} maxLength={11} type='text' label='شماره تلفن' className='login-input' backgroundColor='#F1F2F7'/>
+                <MaterialInput name='username' getValue={this.handleUsername} onKeyDown={this.handleEnter} type='password' label='نام کاربری' className='login-input' backgroundColor='#F1F2F7'/>
                 <Material backgroundColor='rgba(241,242,247,0.6)' className='login-form-submit' onClick={this.login}>ورود</Material>
             </div>
         )

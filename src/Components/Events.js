@@ -1013,6 +1013,7 @@ class Events extends Component
                                        type='text'
                                        label='نام *'
                                        getValue={this.handleName}
+                                       name='name'
                         />
                         <MaterialInput defaultValue={this.state.isUpdating ? this.state.address : undefined}
                                        className='event-create-modal-name'
@@ -1021,6 +1022,7 @@ class Events extends Component
                                        type='text'
                                        label='آدرس'
                                        getValue={this.handleAddress}
+                                       name='address'
                         />
 
                         <div className='event-create-modal-select'>
@@ -1125,6 +1127,7 @@ class Events extends Component
                                        label='توضیحات'
                                        isTextArea={true}
                                        getValue={this.handleDescription}
+                                       name='description'
                         />
                         <MaterialInput defaultValue={this.state.isUpdating ? this.state.info : undefined}
                                        className='event-create-modal-desc'
@@ -1134,6 +1137,7 @@ class Events extends Component
                                        label='اطلاعات'
                                        isTextArea={true}
                                        getValue={this.handleInfo}
+                                       name='info'
                         />
 
                         <div className='event-create-modal-map'>
