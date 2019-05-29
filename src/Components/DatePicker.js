@@ -1,8 +1,17 @@
 import React, {Component} from 'react'
 import JDate from 'jalali-date'
+import * as PropTypes from 'prop-types'
 
 class MyDatePicker extends Component
 {
+    static propTypes = {
+        className: PropTypes.string.isRequired,
+        getValue: PropTypes.func.isRequired,
+        reload: PropTypes.bool,
+        defaultValue: PropTypes.string,
+        placeHolder: PropTypes.string,
+    }
+
     constructor(props)
     {
         super(props)
@@ -357,7 +366,7 @@ class MyDatePicker extends Component
     {
         if (e.target.value.length === 4)
         {
-            this.setState({year: parseInt(e.target.value, 10)}, () => e.target.value = '')
+            this.setState({year: parseInt(e.target.value, 10)}, () => e.target ? e.target.value = '' : null)
         }
         else
         {
