@@ -28,7 +28,7 @@ class Login extends Component
                     const phone = this.state.phone.trim()
                     const username = this.state.username.trim().toLowerCase()
 
-                    fetch('https://restful.injaunja.com/user/login/admin', {
+                    fetch('http://185.211.58.174:1435/user/login/admin', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json',

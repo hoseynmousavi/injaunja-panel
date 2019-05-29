@@ -190,7 +190,7 @@ class Events extends Component
         {
             this.props.handleLoading(true).then(() =>
             {
-                fetch('https://restful.injaunja.com/event/delete', {
+                fetch('http://185.211.58.174:1435/event/delete', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -366,7 +366,7 @@ class Events extends Component
             formData.append('end_year', event.end_year)
         }
 
-        fetch('https://restful.injaunja.com/event/create', {
+        fetch('http://185.211.58.174:1435/event/create', {
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
@@ -381,7 +381,7 @@ class Events extends Component
                 {
                     const id = responseJson.form.id
 
-                    fetch(`https://restful.injaunja.com/event/full/${id}`, {
+                    fetch(`http://185.211.58.174:1435/event/full/${id}`, {
                         headers: {
                             'Cache-Control': 'no-cache',
                         },
@@ -461,7 +461,7 @@ class Events extends Component
                                     formData.append(i.toString(), this.state.pictures[i])
                                 })
 
-                                fetch('https://restful.injaunja.com/event/create', {
+                                fetch('http://185.211.58.174:1435/event/create', {
                                     method: 'POST',
                                     headers: {
                                         'Cache-Control': 'no-cache',
@@ -476,7 +476,7 @@ class Events extends Component
                                         {
                                             const id = responseJson.form.id
 
-                                            fetch(`https://restful.injaunja.com/event/full/${id}`, {
+                                            fetch(`http://185.211.58.174:1435/event/full/${id}`, {
                                                 headers: {
                                                     'Cache-Control': 'no-cache',
                                                 },
@@ -613,7 +613,7 @@ class Events extends Component
                                 formData.append(i.toString(), this.state.pictures[i])
                             })
 
-                            fetch('https://restful.injaunja.com/event/update', {
+                            fetch('http://185.211.58.174:1435/event/update', {
                                 method: 'POST',
                                 headers: {
                                     'Cache-Control': 'no-cache',
@@ -626,7 +626,7 @@ class Events extends Component
                                 {
                                     if (responseJson.state === 1)
                                     {
-                                        fetch(`https://restful.injaunja.com/event/full/${this.state.updateId}`, {
+                                        fetch(`http://185.211.58.174:1435/event/full/${this.state.updateId}`, {
                                             headers: {
                                                 'Cache-Control': 'no-cache',
                                             },
@@ -822,7 +822,7 @@ class Events extends Component
         {
             this.props.handleLoading(true).then(() =>
             {
-                fetch('https://restful.injaunja.com/notification/add', {
+                fetch('http://185.211.58.174:1435/notification/add', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -840,7 +840,7 @@ class Events extends Component
                         if (resJson.state === 1)
                         {
 
-                            fetch(`https://restful.injaunja.com/event/full/${this.state.event.id}`, {
+                            fetch(`http://185.211.58.174:1435/event/full/${this.state.event.id}`, {
                                 headers: {
                                     'Cache-Control': 'no-cache',
                                 },
