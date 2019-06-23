@@ -345,10 +345,8 @@ class Categories extends Component
                         {
                             this.props.handleLoading(false).then(() =>
                             {
-                                this.props.removeCategories(id).then(() =>
-                                {
-                                    NotificationManager.info('دسته بندی با موفقیت حذف شد.')
-                                })
+                                this.props.removeCategories(id)
+                                NotificationManager.info('دسته بندی با موفقیت حذف شد.')
                             })
                         }
                         else

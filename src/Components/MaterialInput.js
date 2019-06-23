@@ -31,17 +31,25 @@ class MaterialInput extends Component
         this.handleClick = this.handleClick.bind(this)
     }
 
+    componentDidMount()
+    {
+        const {defaultValue} = this.props
+        if (defaultValue)
+        {
+            this.setState({...this.state, value: defaultValue})
+        }
+    }
+
     componentWillReceiveProps(nextProps, nextContext)
     {
-        if (nextProps.reload)
+        const {reload, defaultValue} = nextProps
+        if (reload)
         {
-            this.setState({...this.state, value: ''}, () => this.textRef.value = '')
+            this.setState({...this.state, value: ''})
         }
-
-        if (nextProps.defaultValue)
+        else if (defaultValue)
         {
-            const value = nextProps.defaultValue
-            this.setState({...this.state, value})
+            this.setState({...this.state, value: defaultValue})
         }
     }
 

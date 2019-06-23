@@ -120,17 +120,14 @@ class Events extends Component
 
     handleStartTime = (value) =>
     {
-        const start_time = value.trim()
-        if (start_time.length > 3 && start_time.includes(':'))
+        let start_time = value.trim()
+        const time = start_time.split(':')
+        if (start_time.length > 3 && start_time.includes(':') && time[0].length > 0 && time[0].length < 3 && parseInt(time[0]) < 24 && time[1].length === 2 && parseInt(time[1]) < 60)
         {
-            const time = start_time.split(':')
-            if (time[0].length > 0 && time[0].length < 3 && parseInt(time[0]) < 24 && time[1].length === 2 && parseInt(time[1]) < 60)
-            {
-                this.setState({...this.state, start_time, start_time_valid: true})
-            }
-            else this.setState({...this.state, start_time_valid: false})
+            if (start_time[0] === '0') start_time = start_time.substring(1, start_time.length)
+            this.setState({...this.state, start_time, start_time_valid: true})
         }
-        else if (start_time.length > 3)
+        else if (start_time.length > 4 || (start_time.length > 3 && (parseInt(time[0]) >= 24 || parseInt(time[1]) >= 60)))
         {
             this.setState({...this.state, start_time_valid: false})
         }
@@ -138,17 +135,14 @@ class Events extends Component
 
     handleEndTime = (value) =>
     {
-        const end_time = value.trim()
-        if (end_time.length > 3 && end_time.includes(':'))
+        let end_time = value.trim()
+        const time = end_time.split(':')
+        if (end_time.length > 3 && end_time.includes(':') && time[0].length > 0 && time[0].length < 3 && parseInt(time[0]) < 24 && time[1].length === 2 && parseInt(time[1]) < 60)
         {
-            const time = end_time.split(':')
-            if (time[0].length > 0 && time[0].length < 3 && parseInt(time[0]) < 24 && time[1].length === 2 && parseInt(time[1]) < 60)
-            {
-                this.setState({...this.state, end_time, end_time_valid: true})
-            }
-            else this.setState({...this.state, end_time_valid: false})
+            if (end_time[0] === '0') end_time = end_time.substring(1, end_time.length)
+            this.setState({...this.state, end_time, end_time_valid: true})
         }
-        else if (end_time.length > 3)
+        else if (end_time.length > 4 || (end_time.length > 3 && (parseInt(time[0]) >= 24 || parseInt(time[1]) >= 60)))
         {
             this.setState({...this.state, end_time_valid: false})
         }

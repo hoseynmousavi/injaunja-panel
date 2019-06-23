@@ -15,12 +15,12 @@ class App extends Component
     {
         super(props)
         this.state = {
+            redirect: false,
             sideOpen: false,
             loading: true,
             categories: [],
             events: [],
             users: [],
-            redirect: false,
         }
         this.handleResize = this.handleResize.bind(this)
     }
@@ -251,42 +251,44 @@ class App extends Component
 
     removeCategories = (id) =>
     {
-        return new Promise((resolve) =>
+        let categories = [...this.state.categories]
+        for (let i = 0; i < categories.length; i++)
         {
-            let categories = [...this.state.categories]
-            for (let i = 0; i < categories.length; i++)
+            if (categories[i].id === id)
             {
-                if (categories[i].id === id)
-                {
-                    categories.splice(i, 1)
-                    this.setState({...this.state, categories: [...categories]})
-                }
-                if (i === (categories.length - 1))
-                {
-                    resolve()
-                }
+                categories.splice(i, 1)
+                this.setState({...this.state, categories: [...categories]})
+                break
             }
-        })
+        }
     }
 
     removeEvents = (id) =>
     {
-        return new Promise((resolve) =>
+        let events = [...this.state.events]
+        for (let i = 0; i < events.length; i++)
         {
-            let events = [...this.state.events]
-            for (let i = 0; i < events.length; i++)
+            if (events[i].id === id)
             {
-                if (events[i].id === id)
-                {
-                    events.splice(i, 1)
-                    this.setState({...this.state, events: [...events]})
-                }
-                if (i === (events.length - 1))
-                {
-                    resolve()
-                }
+                events.splice(i, 1)
+                this.setState({...this.state, events: [...events]})
+                break
             }
-        })
+        }
+    }
+
+    removeUser = (id) =>
+    {
+        let users = [...this.state.users]
+        for (let i = 0; i < users.length; i++)
+        {
+            if (users[i].id === id)
+            {
+                users.splice(i, 1)
+                this.setState({...this.state, users: [...users]})
+                break
+            }
+        }
     }
 
     render()
@@ -352,7 +354,10 @@ class App extends Component
                                     }/>
 
                                     <Route exact path='/Users' render={() =>
-                                        <Users users={this.state.users}/>
+                                        <Users users={this.state.users}
+                                               handleLoading={this.handleLoading}
+                                               removeUser={this.removeUser}
+                                        />
                                     }/>
 
                                     <Route path='*' render={() =>
